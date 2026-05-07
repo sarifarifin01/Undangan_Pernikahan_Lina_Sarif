@@ -69,12 +69,30 @@
             100% { transform: scale(1.2); opacity: 0.6; }
         }
 
+        /* --- Scroll Animations (Ditingkatkan) --- */
         .reveal {
             opacity: 0; transform: translateY(40px);
             transition: opacity 1s cubic-bezier(0.5, 0, 0, 1), transform 1s cubic-bezier(0.5, 0, 0, 1);
             position: relative; z-index: 10;
         }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        .reveal-left {
+            opacity: 0; transform: translateX(-50px);
+            transition: opacity 1s cubic-bezier(0.5, 0, 0, 1), transform 1s cubic-bezier(0.5, 0, 0, 1);
+            position: relative; z-index: 10;
+        }
+        .reveal-right {
+            opacity: 0; transform: translateX(50px);
+            transition: opacity 1s cubic-bezier(0.5, 0, 0, 1), transform 1s cubic-bezier(0.5, 0, 0, 1);
+            position: relative; z-index: 10;
+        }
+        .reveal-scale {
+            opacity: 0; transform: scale(0.85);
+            transition: opacity 1s cubic-bezier(0.5, 0, 0, 1), transform 1s cubic-bezier(0.5, 0, 0, 1);
+            position: relative; z-index: 10;
+        }
+        .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0); }
+        .reveal-scale.active { opacity: 1; transform: scale(1); }
+        
         .reveal-delay-1 { transition-delay: 0.2s; }
         .reveal-delay-2 { transition-delay: 0.4s; }
 
@@ -95,7 +113,10 @@
         .spin-slow { animation: spin 5s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         
+        /* Floating Animasi */
         .float { animation: floating 4s ease-in-out infinite; }
+        .float-delay-1 { animation: floating 4.5s ease-in-out infinite 1s; }
+        .float-delay-2 { animation: floating 5s ease-in-out infinite 2s; }
         @keyframes floating {
             0% { transform: translate(0,  0px); }
             50%  { transform: translate(0, -12px); }
@@ -108,6 +129,7 @@
             100% { transform: scale(1.15); }
         }
 
+        /* Stardust Particle Effect Cover */
         .stardust {
             position: absolute; width: 2px; height: 2px; background: white;
             border-radius: 50%; box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.8);
@@ -117,6 +139,20 @@
             0% { opacity: 0; transform: translateY(0); }
             50% { opacity: 1; }
             100% { opacity: 0; transform: translateY(-50px); }
+        }
+
+        /* Falling Gold Leaves/Dust Effect */
+        .falling-leaf {
+            position: fixed;
+            z-index: 1;
+            pointer-events: none;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh) rotate(0deg) translateX(0); opacity: 0; }
+            10% { opacity: var(--leaf-opacity, 0.4); }
+            90% { opacity: var(--leaf-opacity, 0.4); }
+            100% { transform: translateY(110vh) rotate(360deg) translateX(50px); opacity: 0; }
         }
 
         .ornament-line { display: flex; align-items: center; justify-content: center; gap: 10px; }
@@ -207,12 +243,12 @@
             <div class="absolute inset-0 bg-[url('cover.jpeg')] bg-cover bg-center opacity-40 ken-burns mix-blend-luminosity"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-maroon-950/60 via-maroon-950/30 to-maroon-950"></div>
             
-            <div class="relative z-10 text-center text-white p-6 w-full flex flex-col items-center justify-center h-full pt-16 sm:pt-20 reveal">
+            <div class="relative z-10 text-center text-white p-6 w-full flex flex-col items-center justify-center h-full pt-16 sm:pt-20 reveal-scale">
                 <p class="text-gold-light tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs mb-4 sm:mb-6 uppercase font-sans drop-shadow-md">The Wedding Of</p>
                 <h1 class="text-4xl min-[380px]:text-5xl sm:text-6xl font-serif font-bold tracking-wide text-gradient-gold mb-4 sm:mb-6 drop-shadow-2xl leading-tight px-2">Lina & Sarif</h1>
                 
                 <div class="ornament-line w-4/5 sm:w-3/4 mx-auto mb-5 sm:mb-6">
-                    <i class="fa-solid fa-heart text-gold text-[10px] sm:text-xs"></i>
+                    <i class="fa-solid fa-heart text-gold text-[10px] sm:text-xs animate-pulse"></i>
                 </div>
                 
                 <p class="text-xs sm:text-sm font-serif text-gray-200 tracking-widest uppercase mb-12 drop-shadow-md">Minggu, 01 Nov 2026</p>
@@ -235,13 +271,13 @@
             <div class="absolute inset-0 bg-white/85 backdrop-blur-[2px]"></div>
 
             <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-full flex items-center justify-center shadow-[0_0_20px_rgba(212,175,55,0.3)] border border-gold/30 z-20">
-                <i class="fa-solid fa-leaf text-gold text-lg sm:text-xl"></i>
+                <i class="fa-solid fa-leaf text-gold text-lg sm:text-xl float"></i>
             </div>
             
             <div class="ambient-glow bg-gold/30 w-48 h-48 sm:w-64 sm:h-64 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
             
             <div class="reveal relative z-10 pt-6 sm:pt-8 pb-2 sm:pb-4">
-                <i class="fa-solid fa-quote-left text-5xl sm:text-6xl text-gold/20 absolute top-2 sm:top-4 left-2 sm:left-4"></i>
+                <i class="fa-solid fa-quote-left text-5xl sm:text-6xl text-gold/20 absolute top-2 sm:top-4 left-2 sm:left-4 float-delay-1"></i>
                 <p class="text-maroon-950 font-serif italic text-base sm:text-lg leading-loose mb-6 sm:mb-8 px-2 relative z-10">
                     "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang."
                 </p>
@@ -253,8 +289,8 @@
         <section class="py-20 sm:py-24 px-5 sm:px-6 bg-parallax-light text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-white/90"></div>
 
-            <div class="absolute top-10 -left-10 opacity-20 text-maroon-900 w-32 sm:w-40 text-[120px] sm:text-[150px] rotate-12 pointer-events-none"><i class="fa-brands fa-pagelines"></i></div>
-            <div class="absolute bottom-32 -right-10 opacity-20 text-maroon-900 w-32 sm:w-40 text-[120px] sm:text-[150px] -rotate-45 pointer-events-none"><i class="fa-brands fa-pagelines"></i></div>
+            <div class="absolute top-10 -left-10 opacity-20 text-maroon-900 w-32 sm:w-40 text-[120px] sm:text-[150px] rotate-12 pointer-events-none float"><i class="fa-brands fa-pagelines"></i></div>
+            <div class="absolute bottom-32 -right-10 opacity-20 text-maroon-900 w-32 sm:w-40 text-[120px] sm:text-[150px] -rotate-45 pointer-events-none float-delay-1"><i class="fa-brands fa-pagelines"></i></div>
             
             <div class="ambient-glow bg-white w-full h-72 sm:h-96 top-40 left-0"></div>
 
@@ -264,42 +300,40 @@
             
             <div class="space-y-20 sm:space-y-24 relative z-10">
                 
-                <div class="flex flex-col items-center reveal">
+                <div class="flex flex-col items-center reveal-left">
                     <div class="relative w-52 h-52 sm:w-64 sm:h-64 mb-6 sm:mb-8">
                         <div class="absolute inset-0 border-[2px] border-gold/60 rounded-full scale-110 rotate-45 transition-transform duration-1000 hover:rotate-90 shadow-[0_0_20px_rgba(212,175,55,0.2)]"></div>
                         <div class="absolute inset-0 border-[1px] border-maroon-900 rounded-full scale-105 -rotate-45 shadow-[inset_0_0_20px_rgba(91,20,34,0.2)]"></div>
                         <div class="w-full h-full p-1.5 bg-gradient-to-br from-white to-gray-100 rounded-full shadow-2xl">
                             <img src="lina.jpeg" onerror="this.src='https://images.unsplash.com/photo-1546822453-29433dbcb5b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Lina" class="w-full h-full object-cover rounded-full" />
                         </div>
-                        <div class="absolute -bottom-4 sm:-bottom-6 right-2 sm:right-4 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-full flex items-center justify-center border-2 border-gold shadow-lg">
+                        <div class="absolute -bottom-4 sm:-bottom-6 right-2 sm:right-4 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-full flex items-center justify-center border-2 border-gold shadow-lg float">
                             <span class="font-serif font-bold text-xl sm:text-2xl text-gold">L</span>
                         </div>
                     </div>
-                    <h3 class="text-2xl sm:text-3xl font-serif text-maroon-950 font-bold tracking-wide mb-1 mt-3">Neng Lina Apriliani</h3>
-                    <span class="text-xs sm:text-sm font-serif text-gold-dark font-bold block mb-2 sm:mb-3">S.Si</span>
+                    <h3 class="text-2xl sm:text-3xl font-serif text-maroon-950 font-bold tracking-wide mb-2 sm:mb-3 mt-3">Neng Lina Apriliani, S.Si</h3>
                     <p class="text-gray-600 font-light text-[11px] sm:text-sm">Putri Pertama dari<br><span class="font-semibold text-maroon-900">Bapak Asep Rohman & Ibu Linda Parida</span></p>
                     <a href="https://www.instagram.com/liinaapr19?igsh=MTFteWxlcmswdTM0OA==" target="_blank" class="mt-5 sm:mt-6 text-gold bg-maroon-950 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center hover:bg-gold hover:text-maroon-950 transition-all duration-300 shadow-[0_5px_15px_rgba(91,20,34,0.4)] border border-gold/30"><i class="fa-brands fa-instagram text-base sm:text-lg"></i></a>
                 </div>
 
-                <div class="text-gold text-4xl sm:text-5xl font-serif reveal flex items-center justify-center gap-4 sm:gap-6 drop-shadow-md py-4">
+                <div class="text-gold text-4xl sm:text-5xl font-serif reveal-scale flex items-center justify-center gap-4 sm:gap-6 drop-shadow-md py-4">
                     <span class="h-px w-12 sm:w-16 bg-gradient-to-l from-gold to-transparent"></span>
                     &
                     <span class="h-px w-12 sm:w-16 bg-gradient-to-r from-gold to-transparent"></span>
                 </div>
 
-                <div class="flex flex-col items-center reveal">
+                <div class="flex flex-col items-center reveal-right">
                     <div class="relative w-52 h-52 sm:w-64 sm:h-64 mb-6 sm:mb-8">
                         <div class="absolute inset-0 border-[2px] border-gold/60 rounded-full scale-110 -rotate-45 transition-transform duration-1000 hover:-rotate-90 shadow-[0_0_20px_rgba(212,175,55,0.2)]"></div>
                         <div class="absolute inset-0 border-[1px] border-maroon-900 rounded-full scale-105 rotate-45 shadow-[inset_0_0_20px_rgba(91,20,34,0.2)]"></div>
                         <div class="w-full h-full p-1.5 bg-gradient-to-br from-white to-gray-100 rounded-full shadow-2xl">
                             <img src="sarif.jpeg" onerror="this.src='https://images.unsplash.com/photo-1550005809-91ad75fb315f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Sarif" class="w-full h-full object-cover rounded-full" />
                         </div>
-                        <div class="absolute -bottom-4 sm:-bottom-6 left-2 sm:left-4 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-full flex items-center justify-center border-2 border-gold shadow-lg">
+                        <div class="absolute -bottom-4 sm:-bottom-6 left-2 sm:left-4 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-full flex items-center justify-center border-2 border-gold shadow-lg float-delay-1">
                             <span class="font-serif font-bold text-xl sm:text-2xl text-gold">S</span>
                         </div>
                     </div>
-                    <h3 class="text-2xl sm:text-3xl font-serif text-maroon-950 font-bold tracking-wide mb-1 mt-3">Sarif Arifin</h3>
-                    <span class="text-xs sm:text-sm font-serif text-gold-dark font-bold block mb-2 sm:mb-3">S.T</span>
+                    <h3 class="text-2xl sm:text-3xl font-serif text-maroon-950 font-bold tracking-wide mb-2 sm:mb-3 mt-3">Sarif Arifin, S.T</h3>
                     <p class="text-gray-600 font-light text-[11px] sm:text-sm">Putra Ke-Tiga dari<br><span class="font-semibold text-maroon-900">Bapak Ade Moh Sodikin & Ibu Ade Ratna</span></p>
                     <a href="https://www.instagram.com/sarifarifin.01?igsh=YzNzZDZpdmVpeGty" target="_blank" class="mt-5 sm:mt-6 text-gold bg-maroon-950 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center hover:bg-gold hover:text-maroon-950 transition-all duration-300 shadow-[0_5px_15px_rgba(91,20,34,0.4)] border border-gold/30"><i class="fa-brands fa-instagram text-base sm:text-lg"></i></a>
                 </div>
@@ -323,7 +357,7 @@
                 <p class="text-gold-light tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs mb-2 uppercase font-sans text-center reveal drop-shadow-md">Rangkaian Acara</p>
                 <h2 class="text-4xl sm:text-5xl font-serif font-bold text-gradient-gold mb-12 sm:mb-16 text-center reveal drop-shadow-xl px-2 tracking-wide">Waktu Bahagia</h2>
                 
-                <div class="flex justify-center gap-2 sm:gap-6 mb-16 sm:mb-20 reveal px-1">
+                <div class="flex justify-center gap-2 sm:gap-6 mb-16 sm:mb-20 reveal-scale px-1">
                     <div class="flex flex-col items-center justify-center glass-card rounded-2xl w-[65px] h-[80px] sm:w-24 sm:h-28 shadow-[0_0_20px_rgba(212,175,55,0.15)] border-t border-gold/40">
                         <span id="cd-hari" class="text-2xl sm:text-4xl font-serif text-white">00</span>
                         <span class="text-[8px] sm:text-xs uppercase tracking-widest text-gold mt-1.5 sm:mt-2 font-medium">Hari</span>
@@ -343,9 +377,9 @@
                 </div>
 
                 <div class="space-y-10 sm:space-y-12">
-                    <div class="glass-card rounded-3xl p-6 sm:p-8 text-center reveal transform transition duration-500 hover:-translate-y-2 border-t-2 border-gold/50 shadow-[0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden">
+                    <div class="glass-card rounded-3xl p-6 sm:p-8 text-center reveal-left transform transition duration-500 hover:-translate-y-2 border-t-2 border-gold/50 shadow-[0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden">
                         <div class="absolute -right-4 -top-4 text-[100px] sm:text-[120px] text-white/5 opacity-30 rotate-12"><i class="fa-solid fa-ring"></i></div>
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gold to-gold-dark rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-[0_0_25px_rgba(212,175,55,0.4)] border-[2px] sm:border-[3px] border-maroon-950">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gold to-gold-dark rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-[0_0_25px_rgba(212,175,55,0.4)] border-[2px] sm:border-[3px] border-maroon-950 float">
                             <i class="fa-solid fa-ring text-maroon-950 text-2xl sm:text-3xl"></i>
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-serif text-gold mb-5 sm:mb-6 tracking-wider drop-shadow-md">Akad Nikah</h3>
@@ -375,9 +409,9 @@
                         </div>
                     </div>
 
-                    <div class="glass-card rounded-3xl p-6 sm:p-8 text-center reveal transform transition duration-500 hover:-translate-y-2 border-t-2 border-gold/50 shadow-[0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden">
+                    <div class="glass-card rounded-3xl p-6 sm:p-8 text-center reveal-right transform transition duration-500 hover:-translate-y-2 border-t-2 border-gold/50 shadow-[0_15px_40px_rgba(0,0,0,0.4)] relative overflow-hidden">
                         <div class="absolute -right-4 -top-4 text-[100px] sm:text-[120px] text-white/5 opacity-30 -rotate-12"><i class="fa-solid fa-champagne-glasses"></i></div>
-                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gold to-gold-dark rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-[0_0_25px_rgba(212,175,55,0.4)] border-[2px] sm:border-[3px] border-maroon-950">
+                        <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-gold to-gold-dark rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-[0_0_25px_rgba(212,175,55,0.4)] border-[2px] sm:border-[3px] border-maroon-950 float-delay-1">
                             <i class="fa-solid fa-champagne-glasses text-maroon-950 text-2xl sm:text-3xl -ml-1"></i>
                         </div>
                         <h3 class="text-2xl sm:text-3xl font-serif text-gold mb-5 sm:mb-6 tracking-wider drop-shadow-md">Resepsi Pernikahan</h3>
@@ -409,7 +443,7 @@
                 </div>
             </div>
             
-            <div class="absolute bottom-0 w-full overflow-hidden leading-[0] z-20">
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
                 <svg class="relative block w-[calc(130%+1.3px)] h-[35px] sm:h-[50px] rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff"></path>
                 </svg>
@@ -429,7 +463,7 @@
             <div class="relative wrap overflow-hidden p-2 h-full z-10">
                 <div class="absolute border-opacity-100 border-gold h-full border" style="left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, #d4af37, #aa8c2c, #d4af37, transparent);"></div>
                 
-                <div class="mb-10 sm:mb-14 flex justify-between items-center w-full right-timeline reveal reveal-delay-1">
+                <div class="mb-10 sm:mb-14 flex justify-between items-center w-full right-timeline reveal-right reveal-delay-1">
                     <div class="order-1 w-[45%]"></div>
                     <div class="z-20 flex items-center order-1 bg-gradient-to-br from-gold to-gold-dark shadow-[0_0_15px_rgba(212,175,55,0.7)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-white justify-center">
                         <i class="fa-solid fa-heart text-white text-[10px] sm:text-sm"></i>
@@ -445,7 +479,7 @@
                     </div>
                 </div>
 
-                <div class="mb-10 sm:mb-14 flex justify-between flex-row-reverse items-center w-full left-timeline reveal reveal-delay-2">
+                <div class="mb-10 sm:mb-14 flex justify-between flex-row-reverse items-center w-full left-timeline reveal-left reveal-delay-2">
                     <div class="order-1 w-[45%]"></div>
                     <div class="z-20 flex items-center order-1 bg-gradient-to-br from-gold to-gold-dark shadow-[0_0_15px_rgba(212,175,55,0.7)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-white justify-center">
                         <i class="fa-solid fa-cloud-rain text-white text-[10px] sm:text-sm"></i>
@@ -461,7 +495,7 @@
                     </div>
                 </div>
 
-                <div class="mb-10 sm:mb-14 flex justify-between items-center w-full right-timeline reveal reveal-delay-1">
+                <div class="mb-10 sm:mb-14 flex justify-between items-center w-full right-timeline reveal-right reveal-delay-1">
                     <div class="order-1 w-[45%]"></div>
                     <div class="z-20 flex items-center order-1 bg-gradient-to-br from-maroon-800 to-maroon-950 shadow-[0_0_15px_rgba(91,20,34,0.5)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-gold justify-center">
                         <i class="fa-solid fa-compass text-gold text-[10px] sm:text-sm"></i>
@@ -477,7 +511,7 @@
                     </div>
                 </div>
 
-                <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline reveal reveal-delay-2">
+                <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline reveal-left reveal-delay-2">
                     <div class="order-1 w-[45%]"></div>
                     <div class="z-20 flex items-center order-1 bg-gradient-to-br from-maroon-800 to-maroon-950 shadow-[0_0_15px_rgba(91,20,34,0.5)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-gold justify-center">
                         <i class="fa-solid fa-dove text-gold text-[10px] sm:text-sm"></i>
@@ -511,24 +545,24 @@
                 <h2 class="text-4xl sm:text-5xl font-serif font-bold text-gradient-gold drop-shadow-xl tracking-wide">Galeri Kami</h2>
             </div>
             
-            <div class="grid grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-3 reveal relative z-10">
-                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-40 sm:h-60 border-[1px] sm:border-[2px] border-gold/30 group relative">
+            <div class="grid grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-3 relative z-10">
+                <div class="reveal-scale overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-40 sm:h-60 border-[1px] sm:border-[2px] border-gold/30 group relative">
                     <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
                     <img src="1.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 1" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
                 </div>
-                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-40 sm:h-60 border-[1px] sm:border-[2px] border-gold/30 group relative">
+                <div class="reveal-scale reveal-delay-1 overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-40 sm:h-60 border-[1px] sm:border-[2px] border-gold/30 group relative">
                     <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
                     <img src="2.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 2" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
                 </div>
-                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] col-span-2 h-56 sm:h-80 border-[2px] sm:border-[3px] border-gold/50 group relative">
+                <div class="reveal-scale reveal-delay-2 overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_15px_40px_rgba(0,0,0,0.6)] col-span-2 h-56 sm:h-80 border-[2px] sm:border-[3px] border-gold/50 group relative">
                     <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
                     <img src="3.jpeg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Gallery 3" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
                 </div>
-                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-36 sm:h-52 border-[1px] sm:border-[2px] border-gold/30 group relative">
+                <div class="reveal-scale overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-36 sm:h-52 border-[1px] sm:border-[2px] border-gold/30 group relative">
                     <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
                     <img src="4.jpeg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 4" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
                 </div>
-                <div class="overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-36 sm:h-52 border-[1px] sm:border-[2px] border-gold/30 group relative">
+                <div class="reveal-scale reveal-delay-1 overflow-hidden rounded-2xl sm:rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-36 sm:h-52 border-[1px] sm:border-[2px] border-gold/30 group relative">
                     <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
                     <img src="5.jpeg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 5" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
                 </div>
@@ -597,8 +631,8 @@
                     </button>
                 </div>
 
-                <div class="glass-card-light p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden bg-gradient-to-br from-maroon-50 to-white border border-maroon-200/50 mt-10 sm:mt-12 shadow-[0_10px_30px_rgba(91,20,34,0.05)]">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5 text-gold text-xl sm:text-2xl shadow-md border border-gold/20"><i class="fa-solid fa-house-chimney-heart"></i></div>
+                <div class="glass-card-light p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden bg-gradient-to-br from-maroon-50 to-white border border-maroon-200/50 mt-10 sm:mt-12 shadow-[0_10px_30px_rgba(91,20,34,0.05)] reveal-scale">
+                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5 text-gold text-xl sm:text-2xl shadow-md border border-gold/20 float"><i class="fa-solid fa-house-chimney-heart"></i></div>
                     <h3 class="font-bold text-xl sm:text-2xl mb-2 sm:mb-3 text-maroon-950 font-serif">Kirim Kado Fisik</h3>
                     <p class="text-[10px] sm:text-xs font-semibold text-gray-700 mb-2 sm:mb-3 border-b border-maroon-200 pb-2 sm:pb-3 inline-block uppercase tracking-wider">Penerima: Neng Lina Apriliani / Sarif Arifin</p>
                     <p class="text-xs sm:text-sm text-gray-600 mb-6 sm:mb-8 font-light leading-relaxed mt-2" id="alamat-kado">
@@ -618,10 +652,10 @@
             <div class="absolute inset-0 bg-white/90"></div>
             <div class="text-center mb-10 sm:mb-14 reveal relative z-10">
                 <p class="text-gold tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs mb-2 sm:mb-3 uppercase font-sans font-semibold">Kehadiran & Doa</p>
-                <h2 class="text-4xl sm:text-5xl font-serif text-maroon-950">Buku Tamu</h2>
+                <h2 class="text-4xl sm:text-5xl font-serif text-maroon-950">RSVP</h2>
             </div>
 
-            <form id="rsvp-form" class="glass-card-light p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] mb-10 sm:mb-14 shadow-[0_20px_50px_rgba(0,0,0,0.08)] reveal border-t-[4px] sm:border-t-[6px] border-t-maroon-900 bg-white relative z-10">
+            <form id="rsvp-form" class="glass-card-light p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] mb-10 sm:mb-14 shadow-[0_20px_50px_rgba(0,0,0,0.08)] reveal-scale border-t-[4px] sm:border-t-[6px] border-t-maroon-900 bg-white relative z-10">
                 <div class="space-y-5 sm:space-y-7">
                     <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Nama Anda</label>
@@ -633,16 +667,6 @@
                             <select id="guest-attendance" class="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm text-gray-700 transition-all appearance-none font-medium">
                                 <option value="Hadir">Ya, Saya akan Hadir</option>
                                 <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
-                            </select>
-                            <div class="absolute inset-y-0 right-0 flex items-center px-4 sm:px-5 pointer-events-none text-gold"><i class="fa-solid fa-chevron-down text-xs"></i></div>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Kirim RSVP Ke WhatsApp</label>
-                        <div class="relative">
-                            <select id="wa-target" class="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm text-gray-700 transition-all appearance-none font-medium">
-                                <option value="6289657616155">Pihak Pria (089657616155)</option>
-                                <option value="6281214010708">Pihak Wanita (081214010708)</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center px-4 sm:px-5 pointer-events-none text-gold"><i class="fa-solid fa-chevron-down text-xs"></i></div>
                         </div>
@@ -664,13 +688,19 @@
                             </div>
                             
                             <button type="button" onclick="toggleAIHelper()" class="mt-3 sm:mt-4 text-[11px] sm:text-xs text-maroon-800 font-bold hover:text-gold flex items-center gap-1.5 sm:gap-2 transition uppercase tracking-wider">
-                                <i class="fa-solid fa-wand-magic-sparkles text-gold text-base sm:text-lg"></i> Bingung ngucapin apa? Klik disini
+                                <i class="fa-solid fa-wand-magic-sparkles text-gold text-base sm:text-lg animate-pulse"></i> Bingung ngucapin apa? Klik disini
                             </button>
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-gradient-to-r from-maroon-900 to-maroon-950 hover:from-maroon-800 hover:to-maroon-900 text-gold font-bold py-4 sm:py-5 px-6 rounded-xl transition-all duration-300 shadow-[0_10px_20px_rgba(91,20,34,0.3)] uppercase tracking-widest text-xs sm:text-sm hover:-translate-y-1">
-                        Kirim Via WhatsApp
-                    </button>
+                    
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6">
+                        <button type="submit" onclick="window.waTarget = '6289657616155';" class="w-full bg-gradient-to-r from-maroon-900 to-maroon-950 hover:from-maroon-800 hover:to-maroon-900 text-gold font-bold py-4 sm:py-4 px-6 rounded-xl transition-all duration-300 shadow-[0_10px_20px_rgba(91,20,34,0.3)] uppercase tracking-widest text-[10px] sm:text-xs hover:-translate-y-1">
+                            Kirim ke Pihak Pria
+                        </button>
+                        <button type="submit" onclick="window.waTarget = '6281214010708';" class="w-full bg-gradient-to-r from-maroon-900 to-maroon-950 hover:from-maroon-800 hover:to-maroon-900 text-gold font-bold py-4 sm:py-4 px-6 rounded-xl transition-all duration-300 shadow-[0_10px_20px_rgba(91,20,34,0.3)] uppercase tracking-widest text-[10px] sm:text-xs hover:-translate-y-1">
+                            Kirim ke Pihak Wanita
+                        </button>
+                    </div>
                 </div>
             </form>
         </section>
@@ -688,7 +718,7 @@
                 </svg>
             </div>
             
-            <div class="relative z-10">
+            <div class="relative z-10 reveal-scale">
                 <h2 class="text-4xl sm:text-5xl font-serif font-bold text-gradient-gold mb-6 sm:mb-8 mt-10 sm:mt-12 drop-shadow-xl tracking-wide">Lina & Sarif</h2>
                 <p class="text-xs sm:text-sm text-gray-300 mb-10 sm:mb-14 font-light leading-relaxed max-w-xs sm:max-w-sm mx-auto px-2 sm:px-4 drop-shadow-md">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
                 
@@ -702,28 +732,8 @@
 
     </main>
 
-    <!-- FIREBASE APP SDK (Wajib ada) -->
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
-
     <script>
-        // =========================================================================
-        // MASUKKAN KONFIGURASI FIREBASE ANDA DI SINI AGAR BUKU TAMU TERSIMPAN!
-        // =========================================================================
-        const firebaseConfig = {
-            apiKey: "ISI_API_KEY_ANDA_DISINI",
-            authDomain: "ISI_AUTH_DOMAIN_ANDA_DISINI",
-            projectId: "ISI_PROJECT_ID_ANDA_DISINI",
-            storageBucket: "ISI_STORAGE_BUCKET_ANDA_DISINI",
-            messagingSenderId: "ISI_SENDER_ID_ANDA_DISINI",
-            appId: "ISI_APP_ID_ANDA_DISINI"
-        };
-        // =========================================================================
-
         const eventDate = new Date('November 1, 2026 08:00:00');
-        
-        let db;
-        let isFirebaseActive = false;
 
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
@@ -732,6 +742,7 @@
                 document.getElementById('guest-name').innerText = to;
             }
 
+            // Enhanced Stardust
             window.createStardust = function() {
                 const container = document.getElementById('cover-particles');
                 if(!container) return;
@@ -746,6 +757,24 @@
                 }
             };
             window.createStardust();
+
+            // Falling Leaves / Petals (New Animation)
+            window.createFallingLeaves = function() {
+                const container = document.body; 
+                for(let i=0; i<25; i++) {
+                    let leaf = document.createElement('i');
+                    const symbols = ['fa-leaf', 'fa-sparkles', 'fa-seedling'];
+                    leaf.className = `fa-solid ${symbols[Math.floor(Math.random()*symbols.length)]} falling-leaf`;
+                    leaf.style.color = '#d4af37'; 
+                    leaf.style.setProperty('--leaf-opacity', Math.random() * 0.2 + 0.1); // subtle opacity
+                    leaf.style.left = Math.random() * 100 + 'vw';
+                    leaf.style.fontSize = (Math.random() * 10 + 6) + 'px';
+                    leaf.style.animationDuration = (Math.random() * 15 + 10) + 's';
+                    leaf.style.animationDelay = (Math.random() * 15) + 's';
+                    container.appendChild(leaf);
+                }
+            };
+            window.createFallingLeaves();
 
             setTimeout(() => {
                 const loader = document.getElementById('loading-screen');
@@ -769,7 +798,7 @@
             toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-check-circle' : 'fa-circle-exclamation'} text-sm sm:text-base"></i> <span class="flex-1">${message}</span>`;
             container.appendChild(toast);
             
-            void toast.offsetWidth; // Trigger reflow
+            void toast.offsetWidth; 
             toast.classList.remove('translate-x-[120%]', 'opacity-0');
             
             setTimeout(() => {
@@ -783,39 +812,50 @@
             
             const name = document.getElementById('guest-input-name').value;
             const attendance = document.getElementById('guest-attendance').value;
-            const waTarget = document.getElementById('wa-target').value;
+            const waTarget = window.waTarget || '6289657616155'; 
             const message = document.getElementById('guest-message').value;
 
-            const btn = this.querySelector('button[type="submit"]');
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Mengalihkan ke WhatsApp...';
-            btn.disabled = true;
+            const btns = this.querySelectorAll('button[type="submit"]');
+            const originalTexts = [];
+            
+            btns.forEach((btn, index) => {
+                originalTexts[index] = btn.innerHTML;
+                if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(waTarget)) {
+                    btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Mengalihkan...';
+                }
+                btn.disabled = true;
+            });
 
             setTimeout(() => {
-                const waMessage = `Halo! Saya *${name}*, ingin mengkonfirmasi bahwa saya *${attendance}* di acara pernikahan kalian.%0A%0A*Ucapan & Doa:*%0A${message}`;
-                const waUrl = `https://wa.me/${waTarget}?text=${waMessage}`;
+                const waMessage = `Halo! Saya *${name}*, ingin mengkonfirmasi bahwa saya *${attendance}* di acara pernikahan kalian.\n\n*Ucapan & Doa:*\n${message}`;
+                const waUrl = `https://wa.me/${waTarget}?text=${encodeURIComponent(waMessage)}`;
                 
                 window.open(waUrl, '_blank');
 
                 this.reset();
                 window.showToast("Diarahkan ke WhatsApp!", "success");
                 
-                btn.innerHTML = '<i class="fa-solid fa-check mr-2 text-base sm:text-lg"></i> Berhasil';
-                btn.classList.replace('from-maroon-900', 'from-green-600');
-                btn.classList.replace('to-maroon-950', 'to-green-700');
+                btns.forEach((btn, index) => {
+                    if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(waTarget)) {
+                        btn.innerHTML = '<i class="fa-solid fa-check mr-2 text-base sm:text-lg"></i> Berhasil';
+                        btn.classList.replace('from-maroon-900', 'from-green-600');
+                        btn.classList.replace('to-maroon-950', 'to-green-700');
+                    }
+                });
                 
                 setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    btn.classList.replace('from-green-600', 'from-maroon-900');
-                    btn.classList.replace('to-green-700', 'to-maroon-950');
-                    btn.disabled = false;
+                    btns.forEach((btn, index) => {
+                        btn.innerHTML = originalTexts[index];
+                        if (btn.classList.contains('from-green-600')) {
+                            btn.classList.remove('from-green-600', 'to-green-700');
+                            btn.classList.add('from-maroon-900', 'to-maroon-950');
+                        }
+                        btn.disabled = false;
+                    });
                 }, 3000);
             }, 800);
         });
 
-        // ==========================================
-        // SISTEM ASISTEN UCAPAN (TANPA API KEY EROOR)
-        // ==========================================
         window.toggleAIHelper = function() {
             const box = document.getElementById('ai-helper-box');
             box.classList.toggle('hidden');
@@ -855,21 +895,20 @@
             }, 600);
         }
 
-        // --- Logika Visual & Navigasi ---
         window.openInvitation = function() {
             const cover = document.getElementById('cover-screen');
             const audio = document.getElementById('bg-music');
             const content = document.getElementById('cover-content');
             
-            content.style.opacity = '0';
+            if(content) content.style.opacity = '0';
             
             setTimeout(() => {
-                cover.style.transform = 'translateY(-100%)';
+                if(cover) cover.style.transform = 'translateY(-100%)';
                 document.body.style.overflow = 'auto'; 
-                audio.play().catch(e => console.log("Auto-play prevented", e));
+                if(audio) audio.play().catch(e => console.log("Auto-play prevented", e));
                 
                 setTimeout(() => {
-                    document.querySelectorAll('.reveal').forEach(el => {
+                    document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale').forEach(el => {
                         if(el.getBoundingClientRect().top < window.innerHeight) {
                             el.classList.add('active');
                         }
@@ -959,7 +998,7 @@
         }
 
         function initScrollObserver() {
-            const reveals = document.querySelectorAll('.reveal');
+            const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
