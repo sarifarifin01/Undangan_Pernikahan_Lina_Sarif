@@ -152,7 +152,7 @@
 
     <!-- COVER SCREEN -->
     <div id="cover-screen" class="fixed inset-0 z-[60] bg-maroon-950 transition-transform duration-[1.5s] ease-in-out flex flex-col items-center justify-center overflow-hidden">
-        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-4.0.3&auto=format&fit=crop&w=2000&q=80')] bg-cover bg-center opacity-30 ken-burns"></div>
+        <div class="absolute inset-0 bg-[url('cover.jpeg')] bg-cover bg-center opacity-30 ken-burns"></div>
         <div class="absolute inset-0 bg-gradient-to-t from-maroon-950 via-maroon-950/70 to-maroon-950/40 mix-blend-multiply"></div>
         <div id="cover-particles" class="absolute inset-0 overflow-hidden pointer-events-none opacity-50"></div>
 
@@ -208,11 +208,6 @@
             <div class="absolute inset-0 bg-gradient-to-b from-maroon-950/60 via-maroon-950/30 to-maroon-950"></div>
             
             <div class="relative z-10 text-center text-white p-6 w-full flex flex-col items-center justify-center h-full pt-16 sm:pt-20 reveal">
-                <div class="mb-5 sm:mb-6 opacity-90 drop-shadow-xl">
-                    <svg width="30" height="30" class="sm:w-[40px] sm:h-[40px]" viewBox="0 0 24 24" fill="none" stroke="#d4af37" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
-                    </svg>
-                </div>
                 <p class="text-gold-light tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs mb-4 sm:mb-6 uppercase font-sans drop-shadow-md">The Wedding Of</p>
                 <h1 class="text-4xl min-[380px]:text-5xl sm:text-6xl font-serif font-bold tracking-wide text-gradient-gold mb-4 sm:mb-6 drop-shadow-2xl leading-tight px-2">Lina & Sarif</h1>
                 
@@ -643,11 +638,21 @@
                         </div>
                     </div>
                     <div>
+                        <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Kirim RSVP Ke WhatsApp</label>
+                        <div class="relative">
+                            <select id="wa-target" class="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm text-gray-700 transition-all appearance-none font-medium">
+                                <option value="6289657616155">Pihak Pria (089657616155)</option>
+                                <option value="6281214010708">Pihak Wanita (081214010708)</option>
+                            </select>
+                            <div class="absolute inset-y-0 right-0 flex items-center px-4 sm:px-5 pointer-events-none text-gold"><i class="fa-solid fa-chevron-down text-xs"></i></div>
+                        </div>
+                    </div>
+                    <div>
                         <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Ucapan & Doa</label>
                         <div class="relative">
                             <textarea id="guest-message" placeholder="Berikan doa terbaik untuk kedua mempelai..." rows="4" class="w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm resize-none transition-all leading-relaxed" required></textarea>
                             
-                            <!-- Fitur Asisten Ucapan Otomatis (Tanpa API) -->
+                            <!-- Fitur Asisten Ucapan Otomatis -->
                             <div class="mt-3 sm:mt-4 bg-gradient-to-br from-maroon-50 to-white border border-maroon-100 rounded-xl p-4 sm:p-5 hidden shadow-inner" id="ai-helper-box">
                                 <p class="text-[11px] sm:text-xs text-maroon-950 font-bold mb-2 tracking-wide"><i class="fa-solid fa-robot text-gold mr-1.5 sm:mr-2 text-base sm:text-lg"></i> Asisten Penulis Ucapan</p>
                                 <p class="text-[10px] sm:text-[11px] text-gray-500 mb-3 sm:mb-4 leading-relaxed">Pilih kedekatan Anda dengan mempelai, asisten kami akan otomatis merangkai kata yang tulus & indah.</p>
@@ -664,21 +669,10 @@
                         </div>
                     </div>
                     <button type="submit" class="w-full bg-gradient-to-r from-maroon-900 to-maroon-950 hover:from-maroon-800 hover:to-maroon-900 text-gold font-bold py-4 sm:py-5 px-6 rounded-xl transition-all duration-300 shadow-[0_10px_20px_rgba(91,20,34,0.3)] uppercase tracking-widest text-xs sm:text-sm hover:-translate-y-1">
-                        Kirim Ucapan
+                        Kirim Via WhatsApp
                     </button>
                 </div>
             </form>
-
-            <div class="reveal relative z-10">
-                <h3 class="font-serif text-xl sm:text-2xl text-maroon-950 mb-6 sm:mb-8 flex items-center justify-center gap-3 sm:gap-4">
-                    <span class="h-[2px] w-8 sm:w-12 bg-gradient-to-r from-transparent to-gold"></span>
-                    <i class="fa-regular fa-comments text-gold"></i> Pesan Tamu
-                    <span class="h-[2px] w-8 sm:w-12 bg-gradient-to-l from-transparent to-gold"></span>
-                </h3>
-                <div id="wishes-container" class="space-y-4 sm:space-y-5 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2 sm:pr-3 pb-4 sm:pb-6">
-                    <!-- Pesan akan dimuat via JavaScript -->
-                </div>
-            </div>
         </section>
 
         <!-- 9. FOOTER -->
@@ -708,8 +702,28 @@
 
     </main>
 
+    <!-- FIREBASE APP SDK (Wajib ada) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+
     <script>
+        // =========================================================================
+        // MASUKKAN KONFIGURASI FIREBASE ANDA DI SINI AGAR BUKU TAMU TERSIMPAN!
+        // =========================================================================
+        const firebaseConfig = {
+            apiKey: "ISI_API_KEY_ANDA_DISINI",
+            authDomain: "ISI_AUTH_DOMAIN_ANDA_DISINI",
+            projectId: "ISI_PROJECT_ID_ANDA_DISINI",
+            storageBucket: "ISI_STORAGE_BUCKET_ANDA_DISINI",
+            messagingSenderId: "ISI_SENDER_ID_ANDA_DISINI",
+            appId: "ISI_APP_ID_ANDA_DISINI"
+        };
+        // =========================================================================
+
         const eventDate = new Date('November 1, 2026 08:00:00');
+        
+        let db;
+        let isFirebaseActive = false;
 
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
@@ -744,9 +758,6 @@
             setInterval(window.updateCountdown, 1000);
             window.updateCountdown();
             initScrollObserver();
-            
-            // Muat pesan dari Local Storage
-            loadLocalMessages();
         });
 
         window.showToast = function(message, type = 'error') {
@@ -758,7 +769,7 @@
             toast.innerHTML = `<i class="fa-solid ${type === 'success' ? 'fa-check-circle' : 'fa-circle-exclamation'} text-sm sm:text-base"></i> <span class="flex-1">${message}</span>`;
             container.appendChild(toast);
             
-            void toast.offsetWidth;
+            void toast.offsetWidth; // Trigger reflow
             toast.classList.remove('translate-x-[120%]', 'opacity-0');
             
             setTimeout(() => {
@@ -767,87 +778,29 @@
             }, 4000);
         }
 
-        // ==========================================
-        // SISTEM BUKU TAMU LOKAL (Tanpa Firebase/Error)
-        // ==========================================
-        const STORAGE_KEY = 'wedding_wishes_lina_sarif';
-
-        function loadLocalMessages() {
-            const container = document.getElementById('wishes-container');
-            let messages = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-            
-            // Tambahkan pesan dummy jika kosong agar terlihat bagus
-            if(messages.length === 0) {
-                messages = [
-                    { id: '1', name: 'Keluarga Besar', attendance: 'Hadir', message: 'Selamat menempuh hidup baru Lina & Sarif. Semoga menjadi keluarga yang sakinah, mawaddah, warahmah.', timestamp: Date.now() - 86400000 },
-                    { id: '2', name: 'Teman Kuliah', attendance: 'Hadir', message: 'Happy wedding! Semoga lancar sampai hari H dan bahagia selalu selamanya.', timestamp: Date.now() - 4000000 }
-                ];
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-            }
-
-            // Cek apakah url mengandung ?admin=true
-            const urlParams = new URLSearchParams(window.location.search);
-            const isAdmin = urlParams.get('admin') === 'true';
-
-            let html = '';
-            messages.sort((a, b) => b.timestamp - a.timestamp).forEach(msg => {
-                const initial = msg.name ? msg.name.charAt(0).toUpperCase() : '?';
-                const badgeClass = msg.attendance === 'Hadir' ? 'bg-green-50 text-green-700 border-green-200' : 'bg-red-50 text-red-700 border-red-200';
-                
-                const deleteBtn = isAdmin ? `<button type="button" onclick="deleteLocalMessage('${msg.id}')" class="text-gray-300 hover:text-red-500 ml-auto transition-colors"><i class="fa-solid fa-trash text-[10px]"></i></button>` : '';
-
-                html += `
-                    <div class="bg-white p-5 sm:p-6 rounded-[1.25rem] sm:rounded-3xl border border-gray-100 flex gap-4 sm:gap-5 shadow-[0_5px_25px_rgba(0,0,0,0.04)] reveal active" id="msg-${msg.id}">
-                        <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-gold to-gold-dark rounded-full flex items-center justify-center text-white font-serif text-xl sm:text-2xl shrink-0 shadow-inner border-[2px] border-white">
-                            ${initial}
-                        </div>
-                        <div class="w-full">
-                            <div class="flex items-start justify-between mb-1 sm:mb-1.5">
-                                <div>
-                                    <h4 class="font-bold text-maroon-950 text-sm sm:text-base mb-1.5">${msg.name}</h4>
-                                    <span class="${badgeClass} border text-[8px] sm:text-[10px] px-2.5 sm:py-1 rounded-full uppercase font-bold tracking-widest">${msg.attendance}</span>
-                                </div>
-                                ${deleteBtn}
-                            </div>
-                            <span class="text-[9px] sm:text-[10px] text-gray-400 mb-2 sm:mb-3 block uppercase tracking-widest font-medium mt-2"><i class="fa-regular fa-clock mr-1 sm:mr-1.5"></i> Baru saja</span>
-                            <p class="text-xs sm:text-sm text-gray-600 font-light leading-relaxed">${msg.message}</p>
-                        </div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
         document.getElementById('rsvp-form').addEventListener('submit', function(e) {
             e.preventDefault();
             
             const name = document.getElementById('guest-input-name').value;
             const attendance = document.getElementById('guest-attendance').value;
+            const waTarget = document.getElementById('wa-target').value;
             const message = document.getElementById('guest-message').value;
 
             const btn = this.querySelector('button[type="submit"]');
             const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Mengirim...';
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-2"></i> Mengalihkan ke WhatsApp...';
             btn.disabled = true;
 
             setTimeout(() => {
-                const newMessage = {
-                    id: Date.now().toString(),
-                    name: name,
-                    attendance: attendance,
-                    message: message,
-                    timestamp: Date.now()
-                };
-
-                const messages = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-                messages.push(newMessage);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-
-                loadLocalMessages();
-                this.reset();
+                const waMessage = `Halo! Saya *${name}*, ingin mengkonfirmasi bahwa saya *${attendance}* di acara pernikahan kalian.%0A%0A*Ucapan & Doa:*%0A${message}`;
+                const waUrl = `https://wa.me/${waTarget}?text=${waMessage}`;
                 
-                window.showToast("Pesan dan konfirmasi kehadiran berhasil dikirim!", "success");
-                btn.innerHTML = '<i class="fa-solid fa-check mr-2 text-base sm:text-lg"></i> Terkirim';
+                window.open(waUrl, '_blank');
+
+                this.reset();
+                window.showToast("Diarahkan ke WhatsApp!", "success");
+                
+                btn.innerHTML = '<i class="fa-solid fa-check mr-2 text-base sm:text-lg"></i> Berhasil';
                 btn.classList.replace('from-maroon-900', 'from-green-600');
                 btn.classList.replace('to-maroon-950', 'to-green-700');
                 
@@ -860,41 +813,8 @@
             }, 800);
         });
 
-        window.deleteLocalMessage = function(id) {
-            const toastContainer = document.getElementById('toast-container');
-            const confirmBox = document.createElement('div');
-            confirmBox.className = 'bg-white text-gray-800 p-4 rounded-xl shadow-2xl text-xs sm:text-sm font-semibold flex flex-col gap-3 transform transition-all duration-300 translate-x-[120%] border-l-4 border-red-500';
-            confirmBox.innerHTML = `
-                <p>Hapus pesan ini?</p>
-                <div class="flex justify-end gap-2 mt-1">
-                    <button class="px-3 py-1.5 rounded-lg bg-gray-100 hover:bg-gray-200 text-gray-600 transition" id="btn-batal-${id}">Batal</button>
-                    <button class="px-3 py-1.5 rounded-lg bg-red-500 hover:bg-red-600 text-white transition" id="btn-hapus-${id}">Hapus</button>
-                </div>
-            `;
-            toastContainer.appendChild(confirmBox);
-            
-            void confirmBox.offsetWidth;
-            confirmBox.classList.remove('translate-x-[120%]');
-
-            document.getElementById(`btn-batal-${id}`).onclick = () => {
-                confirmBox.classList.add('translate-x-[120%]');
-                setTimeout(() => confirmBox.remove(), 300);
-            };
-
-            document.getElementById(`btn-hapus-${id}`).onclick = () => {
-                confirmBox.classList.add('translate-x-[120%]');
-                setTimeout(() => confirmBox.remove(), 300);
-                
-                let messages = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [];
-                messages = messages.filter(msg => msg.id !== id);
-                localStorage.setItem(STORAGE_KEY, JSON.stringify(messages));
-                loadLocalMessages();
-                window.showToast("Pesan berhasil dihapus.", "success");
-            };
-        }
-
         // ==========================================
-        // SISTEM AI OTOMATIS (Tanpa API Key)
+        // SISTEM ASISTEN UCAPAN (TANPA API KEY EROOR)
         // ==========================================
         window.toggleAIHelper = function() {
             const box = document.getElementById('ai-helper-box');
@@ -904,7 +824,6 @@
         window.generateWish = function(relation) {
             const textArea = document.getElementById('guest-message');
             
-            // Kumpulan database ucapan puitis
             const wishes = {
                 'sahabat': [
                     "Selamat menempuh hidup baru, sahabatku! Semoga perjalanan kalian selalu diiringi tawa, dikuatkan saat berduka, dan abadi hingga ke surga.",
@@ -923,7 +842,6 @@
                 ]
             };
 
-            // Animasi seolah sedang loading AI
             textArea.value = "";
             textArea.placeholder = "Asisten sedang menulis...";
             
