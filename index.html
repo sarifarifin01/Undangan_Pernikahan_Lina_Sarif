@@ -35,11 +35,16 @@
                         'shimmer': 'shimmer 2s linear infinite',
                         'spin-slow': 'spin 8s linear infinite',
                         'blob': 'blob 7s infinite',
+                        'marquee': 'marquee 25s linear infinite',
                     },
                     keyframes: {
                         shimmer: {
                             '0%': { transform: 'translateX(-100%)' },
                             '100%': { transform: 'translateX(100%)' }
+                        },
+                        marquee: {
+                            '0%': { transform: 'translateX(0%)' },
+                            '100%': { transform: 'translateX(-50%)' }
                         },
                         blob: {
                             '0%': { transform: 'translate(0px, 0px) scale(1)' },
@@ -89,7 +94,6 @@
         .text-gradient-gold {
             background: linear-gradient(135deg, #f9ebb2 0%, #d4af37 50%, #aa8c2c 100%);
             -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            text-shadow: 0px 4px 15px rgba(212, 175, 55, 0.3);
         }
 
         .ambient-glow {
@@ -128,20 +132,11 @@
             border: 1px solid rgba(212, 175, 55, 0.4); border-top: 1px solid rgba(255, 255, 255, 0.6); border-left: 1px solid rgba(255, 255, 255, 0.6);
             box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
         }
-        
-        /* Shimmer effect inside cards */
-        .glass-card-light::before, .glass-card::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
-            transform: skewX(-20deg); transition: 0.5s; pointer-events: none; z-index: 1;
-        }
-        .glass-card-light:hover::before, .glass-card:hover::before { left: 150%; }
 
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: #faf8f5; }
         ::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
 
-        /* Floating & Animations */
         .float { animation: floating 4s ease-in-out infinite; }
         .float-delay-1 { animation: floating 4.5s ease-in-out infinite 1s; }
         .float-delay-2 { animation: floating 5s ease-in-out infinite 2s; }
@@ -157,7 +152,6 @@
             100% { transform: scale(1.15) translate(-1%, -1%); }
         }
 
-        /* Stardust & Leaves */
         .stardust {
             position: absolute; width: 2px; height: 2px; background: #f9ebb2;
             border-radius: 50%; box-shadow: 0 0 10px 2px rgba(212, 175, 55, 0.8);
@@ -196,7 +190,6 @@
             pointer-events: none; z-index: 40; border-radius: 16px; mix-blend-mode: difference;
         }
 
-        /* Confetti Canvas */
         #confetti-canvas {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none; z-index: 99999;
@@ -243,10 +236,11 @@
 
         <div id="cover-particles" class="absolute inset-0 overflow-hidden pointer-events-none opacity-60"></div>
 
-        <div id="cover-content" class="relative z-10 w-full max-w-md px-6 sm:px-8 text-center h-full flex flex-col justify-between py-20 sm:py-24 transition-opacity duration-1000">
+        <div id="cover-content" class="relative z-10 w-full max-w-md px-6 sm:px-8 text-center h-full flex flex-col justify-between py-20 sm:py-24">
             <div class="space-y-3 sm:space-y-4 pt-8 sm:pt-12 float">
                 <p class="tracking-[0.2em] sm:tracking-[0.3em] text-gold-light text-[10px] sm:text-xs uppercase font-sans font-medium opacity-90 drop-shadow-md">Undangan Pernikahan</p>
-                <h1 class="text-5xl min-[380px]:text-6xl sm:text-7xl font-serif font-bold tracking-wide text-gradient-gold leading-tight mt-2 pb-2 px-2">Lina & Sarif</h1>
+                <!-- Penambahan pr-8 dan &nbsp; agar huruf 'f' tidak terpotong, tanpa efek blur (shadow) -->
+                <h1 class="text-4xl min-[380px]:text-5xl sm:text-5xl font-serif font-bold tracking-wide text-gradient-gold leading-tight mt-2 pb-2 px-4 sm:px-6 text-center whitespace-nowrap drop-shadow-none">Lina & Sarif</h1>
                 <p class="font-handwriting text-2xl sm:text-3xl text-white/80 mt-2">We are getting married</p>
             </div>
 
@@ -280,7 +274,6 @@
             <div class="ambient-glow bg-gold w-96 h-96 top-10 right-0 animate-blob"></div>
             <div class="ambient-glow bg-maroon-600 w-72 h-72 bottom-10 left-0 animate-blob animation-delay-2000"></div>
             
-            <!-- Floral Accents -->
             <i class="fa-solid fa-spa absolute top-20 left-10 text-4xl sm:text-6xl text-gold/30 wave-flower"></i>
             <i class="fa-solid fa-seedling absolute bottom-40 right-10 text-5xl sm:text-7xl text-gold/20 float-delay-1"></i>
             
@@ -293,7 +286,8 @@
                     The Wedding Of
                     <i class="fa-solid fa-star text-[6px] absolute -right-4 top-1/2 -translate-y-1/2 text-gold"></i>
                 </p>
-                <h1 class="text-5xl min-[380px]:text-6xl sm:text-7xl font-serif font-bold tracking-wide text-gradient-gold mb-4 sm:mb-6 drop-shadow-2xl leading-tight px-2">Lina & Sarif</h1>
+                <!-- Penambahan pr-8 dan &nbsp; agar huruf 'f' tidak terpotong -->
+                <h1 class="text-4xl min-[380px]:text-5xl sm:text-5xl font-serif font-bold tracking-wide text-gradient-gold mb-4 sm:mb-6 drop-shadow-none leading-tight px-4 sm:px-6 text-center whitespace-nowrap">Lina & Sarif</h1>
                 
                 <div class="ornament-line w-4/5 sm:w-3/4 mx-auto mb-5 sm:mb-6">
                     <i class="fa-solid fa-heart text-gold text-[10px] sm:text-xs animate-pulse drop-shadow-[0_0_10px_rgba(212,175,55,0.8)]"></i>
@@ -302,14 +296,14 @@
                 <p class="text-xs sm:text-sm font-sans font-medium text-gray-200 tracking-widest uppercase mb-2 drop-shadow-md bg-maroon-900/50 px-6 py-2 rounded-full border border-gold/30 backdrop-blur-sm">Minggu, 01 Nov 2026</p>
             </div>
 
-            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gold animate-bounce flex flex-col items-center opacity-90 cursor-pointer interactive-elem" onclick="document.getElementById('quotes-section').scrollIntoView({behavior: 'smooth'})">
-                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest mb-1 sm:mb-2 font-light text-gold-light drop-shadow-md">Scroll ke Bawah</span>
-                <div class="w-8 h-12 border-2 border-gold rounded-full flex justify-center pt-2">
-                    <div class="w-1 h-3 bg-gold rounded-full animate-[floating_2s_infinite]"></div>
+            <!-- Scroll indicator (Modern Mouse) -->
+            <div class="absolute bottom-12 left-1/2 -translate-x-1/2 text-gold flex flex-col items-center opacity-90 cursor-pointer interactive-elem z-20 group" onclick="document.getElementById('quotes-section').scrollIntoView({behavior: 'smooth'})">
+                <span class="text-[9px] sm:text-[10px] uppercase tracking-widest mb-2 sm:mb-3 font-light text-white/80 group-hover:text-gold transition-colors drop-shadow-md">Scroll</span>
+                <div class="w-6 h-10 border-[2px] border-white/60 group-hover:border-gold rounded-full flex justify-center pt-2 transition-colors relative shadow-[0_0_10px_rgba(255,255,255,0.2)] group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)]">
+                    <div class="w-1.5 h-2.5 bg-white group-hover:bg-gold rounded-full animate-bounce transition-colors"></div>
                 </div>
             </div>
             
-            <!-- Layered Waves -->
             <div class="absolute bottom-0 w-full overflow-hidden leading-[0]">
                 <svg class="relative block w-[calc(130%+1.3px)] h-[40px] sm:h-[60px] rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.5)"></path>
@@ -322,7 +316,6 @@
         <section id="quotes-section" class="py-16 sm:py-20 px-6 sm:px-8 text-center bg-parallax-light relative overflow-hidden">
             <div class="absolute inset-0 bg-white/85 backdrop-blur-[3px]"></div>
 
-            <!-- Floral Corners -->
             <i class="fa-brands fa-pagelines absolute top-5 -left-5 text-7xl sm:text-8xl text-gold/20 wave-flower opacity-60"></i>
             <i class="fa-brands fa-pagelines absolute bottom-5 -right-5 text-7xl sm:text-8xl text-gold/20 wave-flower opacity-60" style="transform: scaleX(-1);"></i>
 
@@ -331,7 +324,8 @@
             <div class="reveal relative z-10 pt-6 sm:pt-8 pb-2 sm:pb-4 border-y border-gold/20 py-10 max-w-2xl mx-auto">
                 <i class="fa-solid fa-spa text-3xl sm:text-4xl text-gold/50 mb-6 animate-pulse"></i>
                 
-                <p class="font-arabic text-2xl sm:text-3xl lg:text-4xl text-maroon-900 leading-[1.8] sm:leading-[2] mb-6 drop-shadow-sm px-2" dir="rtl">
+                <!-- Line height diperlebar agar tidak menumpuk di HP maupun Desktop -->
+                <p class="font-arabic text-3xl sm:text-4xl text-maroon-900 leading-[2.5] sm:leading-[3] mb-8 drop-shadow-sm px-2" dir="rtl">
                     وَمِنْ ءَايَٰتِهِۦٓ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَٰجًا لِّتَسْكُنُوٓا۟ إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً ۚ إِنَّ فِى ذَٰلِكَ لَءَايَٰتٍ لِّقَوْمٍ يَتَفَكَّرُونَ
                 </p>
 
@@ -346,7 +340,6 @@
         <section class="py-20 sm:py-24 px-5 sm:px-6 bg-parallax-light text-center relative overflow-hidden">
             <div class="absolute inset-0 bg-gradient-to-b from-white/95 via-white/80 to-white/95"></div>
 
-            <!-- Floral Background Accents -->
             <i class="fa-solid fa-seedling absolute top-10 right-10 text-6xl opacity-10 text-maroon-900 pointer-events-none wave-flower"></i>
             <i class="fa-solid fa-leaf absolute bottom-32 left-10 text-5xl opacity-10 text-maroon-900 pointer-events-none float-delay-1" style="transform: scaleX(-1);"></i>
 
@@ -361,7 +354,6 @@
                 <!-- Mempelai Wanita -->
                 <div class="flex flex-col items-center reveal-left">
                     <div class="relative w-56 h-56 sm:w-64 sm:h-64 mb-6 sm:mb-8 group">
-                        <!-- Decorative Rings -->
                         <div class="absolute inset-0 border-[2px] border-gold/40 rounded-full scale-110 group-hover:rotate-180 transition-transform duration-[3s] shadow-[0_0_20px_rgba(212,175,55,0.15)] border-dashed"></div>
                         <div class="absolute inset-0 border-[1px] border-maroon-900 rounded-full scale-105 rotate-45 shadow-[inset_0_0_20px_rgba(91,20,34,0.1)]"></div>
                         
@@ -369,13 +361,13 @@
                             <img src="lina.jpeg" onerror="this.src='https://images.unsplash.com/photo-1546822453-29433dbcb5b1?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Lina" class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition duration-700" />
                         </div>
                         
-                        <!-- Initial Badge -->
                         <div class="absolute -bottom-4 sm:-bottom-6 right-2 sm:right-4 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-full flex items-center justify-center border-2 border-gold shadow-lg float">
                             <span class="font-serif font-bold text-xl sm:text-2xl text-gold">L</span>
                         </div>
                     </div>
-                    <h3 class="text-3xl sm:text-4xl font-serif text-maroon-950 font-bold tracking-wide mb-2 mt-3">Neng Lina Apriliani, S.Si</h3>
-                    <p class="text-gray-600 font-light text-[11px] sm:text-sm mt-1">Putri Pertama dari<br><span class="font-semibold text-maroon-900 text-xs sm:text-base">Bapak Asep Rohman & Ibu Linda Parida</span></p>
+                    <!-- Teks Sejajar Satu Baris -->
+                    <h3 class="text-xl min-[380px]:text-2xl sm:text-4xl font-serif text-maroon-950 font-bold tracking-wide mb-2 mt-3 whitespace-nowrap">Neng Lina Apriliani, S.Si</h3>
+                    <p class="text-gray-600 font-light text-[11px] sm:text-sm mt-1 whitespace-nowrap">Putri Pertama dari<br><span class="font-semibold text-maroon-900 text-xs sm:text-base">Bapak Asep Rohman & Ibu Linda Parida</span></p>
                     <a href="https://www.instagram.com/liinaapr19?igsh=MTFteWxlcmswdTM0OA==" target="_blank" class="interactive-elem mt-5 sm:mt-6 text-gold bg-maroon-950 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center hover:bg-gold hover:text-maroon-950 transition-all duration-300 shadow-[0_5px_15px_rgba(91,20,34,0.4)] border border-gold/30 hover:-translate-y-1"><i class="fa-brands fa-instagram text-base sm:text-lg"></i></a>
                 </div>
 
@@ -389,7 +381,6 @@
                 <!-- Mempelai Pria -->
                 <div class="flex flex-col items-center reveal-right">
                     <div class="relative w-56 h-56 sm:w-64 sm:h-64 mb-6 sm:mb-8 group">
-                        <!-- Decorative Rings -->
                         <div class="absolute inset-0 border-[2px] border-gold/40 rounded-full scale-110 group-hover:-rotate-180 transition-transform duration-[3s] shadow-[0_0_20px_rgba(212,175,55,0.15)] border-dashed"></div>
                         <div class="absolute inset-0 border-[1px] border-maroon-900 rounded-full scale-105 -rotate-45 shadow-[inset_0_0_20px_rgba(91,20,34,0.1)]"></div>
                         
@@ -397,13 +388,13 @@
                             <img src="sarif.jpeg" onerror="this.src='https://images.unsplash.com/photo-1550005809-91ad75fb315f?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Sarif" class="w-full h-full object-cover rounded-full transform group-hover:scale-105 transition duration-700" />
                         </div>
 
-                        <!-- Initial Badge -->
                         <div class="absolute -bottom-4 sm:-bottom-6 left-2 sm:left-4 w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-maroon-800 to-maroon-950 rounded-full flex items-center justify-center border-2 border-gold shadow-lg float-delay-1">
                             <span class="font-serif font-bold text-xl sm:text-2xl text-gold">S</span>
                         </div>
                     </div>
-                    <h3 class="text-3xl sm:text-4xl font-serif text-maroon-950 font-bold tracking-wide mb-2 mt-3">Sarif Arifin, S.T</h3>
-                    <p class="text-gray-600 font-light text-[11px] sm:text-sm mt-1">Putra Ke-Tiga dari<br><span class="font-semibold text-maroon-900 text-xs sm:text-base">Bapak Ade Moh Sodikin & Ibu Ade Ratna</span></p>
+                    <!-- Teks Sejajar Satu Baris -->
+                    <h3 class="text-xl min-[380px]:text-2xl sm:text-4xl font-serif text-maroon-950 font-bold tracking-wide mb-2 mt-3 whitespace-nowrap">Sarif Arifin, S.T</h3>
+                    <p class="text-gray-600 font-light text-[11px] sm:text-sm mt-1 whitespace-nowrap">Putra Ke-Tiga dari<br><span class="font-semibold text-maroon-900 text-xs sm:text-base">Bapak Ade Moh Sodikin & Ibu Ade Ratna</span></p>
                     <a href="https://www.instagram.com/sarifarifin.01?igsh=YzNzZDZpdmVpeGty" target="_blank" class="interactive-elem mt-5 sm:mt-6 text-gold bg-maroon-950 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center hover:bg-gold hover:text-maroon-950 transition-all duration-300 shadow-[0_5px_15px_rgba(91,20,34,0.4)] border border-gold/30 hover:-translate-y-1"><i class="fa-brands fa-instagram text-base sm:text-lg"></i></a>
                 </div>
             </div>
@@ -527,115 +518,122 @@
         </section>
 
         <!-- 5. KISAH CINTA SECTION -->
-        <section class="py-20 sm:py-24 px-4 sm:px-6 bg-parallax-light overflow-hidden relative">
-            <div class="absolute inset-0 bg-white/90"></div>
-            <div class="ambient-glow bg-gold/10 w-72 h-72 sm:w-96 sm:h-96 top-1/4 right-0"></div>
+        <section class="py-20 sm:py-24 px-4 sm:px-6 bg-parallax-light overflow-hidden relative min-h-screen flex flex-col">
+            <div class="absolute inset-0 bg-white/95"></div>
+            <div class="ambient-glow bg-gold/15 w-72 h-72 sm:w-96 sm:h-96 top-1/4 right-0"></div>
+            <div class="ambient-glow bg-maroon-900/10 w-72 h-72 bottom-0 left-0"></div>
             
-            <p class="text-gold tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs mb-2 uppercase font-sans text-center reveal drop-shadow-sm font-semibold relative z-10">Sebuah Perjalanan Pulang 🤍</p>
+            <p class="text-gold tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs mb-2 uppercase font-sans text-center reveal drop-shadow-sm font-semibold relative z-10 mt-10">Sebuah Perjalanan Pulang 🤍</p>
             <h2 class="text-4xl sm:text-5xl font-serif font-bold text-maroon-950 mb-6 text-center reveal relative z-10 px-2 tracking-wide">Kisah Cinta Kami</h2>
             
-            <p class="text-[11px] sm:text-sm text-gray-600 mb-14 sm:mb-20 text-center font-light leading-relaxed max-w-lg mx-auto relative z-10 px-4 reveal">Banyak yang berkata bahwa jatuh cinta adalah hal yang sederhana. Namun, tetap saling memilih di tengah badai, menjaga di saat rapuh, dan bertahan ketika dunia meminta menyerah—itulah cinta yang sesungguhnya.</p>
+            <p class="text-[11px] sm:text-sm text-gray-600 mb-14 sm:mb-20 text-center font-light leading-relaxed max-w-lg mx-auto relative z-10 reveal px-2">Banyak yang berkata bahwa jatuh cinta adalah hal yang sederhana. Namun, tetap saling memilih di tengah badai, menjaga di saat rapuh, dan bertahan ketika dunia meminta menyerah—itulah cinta yang sesungguhnya.</p>
 
-            <div class="relative wrap overflow-hidden p-2 h-full z-10">
-                <!-- Golden Line Timeline -->
-                <div class="absolute border-opacity-100 border-gold h-full border" style="left: 50%; width: 2px; background: linear-gradient(to bottom, transparent, #d4af37, #aa8c2c, #d4af37, transparent);"></div>
+            <div class="relative w-full max-w-2xl mx-auto z-10 pl-1 sm:pl-4 pb-10">
+                <!-- Golden Line Vertical -->
+                <div class="absolute left-[16px] sm:left-[32px] top-4 bottom-4 w-[2px] bg-gradient-to-b from-transparent via-gold to-transparent opacity-80"></div>
                 
-                <div class="mb-10 sm:mb-14 flex justify-between items-center w-full right-timeline reveal-right reveal-delay-1 group">
-                    <div class="order-1 w-[45%]"></div>
-                    <div class="z-20 flex items-center order-1 bg-gradient-to-br from-gold to-gold-dark shadow-[0_0_15px_rgba(212,175,55,0.7)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-white justify-center transform transition-transform group-hover:scale-125">
-                        <i class="fa-solid fa-heart text-white text-[10px] sm:text-sm"></i>
+                <!-- Awal -->
+                <div class="relative pl-10 sm:pl-16 mb-12 reveal-left group">
+                    <div class="absolute left-[7px] sm:left-[23px] top-8 w-5 h-5 bg-maroon-950 border-[3px] border-gold rounded-full z-10 group-hover:scale-125 transition-transform shadow-[0_0_10px_rgba(212,175,55,0.8)] flex items-center justify-center">
+                        <div class="w-1 h-1 bg-white rounded-full animate-ping"></div>
                     </div>
-                    <div class="order-1 glass-card-light rounded-2xl sm:rounded-3xl shadow-xl w-[45%] p-3 sm:p-5 text-left relative transition-all duration-500 border border-gold/20 hover:border-gold/60 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)]">
-                        <div class="absolute top-5 sm:top-6 -left-2 sm:-left-3 w-4 h-4 sm:w-6 sm:h-6 bg-white border-l border-b border-gold/30 transform rotate-45 rounded-sm"></div>
-                        
-                        <div class="overflow-hidden rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-gray-100 shadow-inner">
-                            <img src="awal.jpeg" onerror="this.src='https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Tentang Bertahan" class="w-full h-20 sm:h-40 object-cover transition-transform duration-1000 group-hover:scale-110" />
+                    
+                    <!-- Background Solid Maroon -->
+                    <div class="bg-maroon-950 rounded-[1.5rem] p-4 sm:p-5 w-full text-center relative transition-all duration-500 border border-gold/30 hover:border-gold hover:-translate-y-2 shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+                        <!-- Foto Lebih Gede -->
+                        <div class="w-full h-40 sm:h-56 rounded-xl overflow-hidden border border-gold/40 shadow-md mb-4 relative group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-shadow">
+                            <img src="awal.jpeg" onerror="this.src='https://images.unsplash.com/photo-1522529599102-193c0d76b5b6?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Awal" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
                         </div>
-                        <h4 class="mb-1.5 sm:mb-2 font-serif text-sm sm:text-lg font-bold text-maroon-950">Tentang Bertahan</h4>
-                        <p class="text-[9px] sm:text-xs text-gray-600 font-light leading-relaxed text-justify">Jika perjalanan ini harus diceritakan dari awal, mungkin tak akan selesai dalam sekali ucap. Sebab bagi kami, cinta bukan sekadar tentang pertemuan, melainkan tentang memilih tetap tinggal saat banyak alasan untuk pergi.</p>
+                        <!-- Sub / Judul -->
+                        <h4 class="font-serif text-base sm:text-lg font-bold text-gold mb-2 tracking-wide whitespace-nowrap overflow-hidden text-ellipsis px-2">Tentang Bertahan</h4>
+                        <!-- Kata-kata -->
+                        <p class="text-[11px] sm:text-xs text-gray-200 font-light leading-relaxed text-justify px-2">Jika perjalanan ini harus diceritakan dari awal, mungkin tak akan selesai dalam sekali ucap. Sebab bagi kami, cinta bukan sekadar tentang pertemuan, melainkan tentang memilih tetap tinggal saat banyak alasan untuk pergi.</p>
                     </div>
                 </div>
 
-                <div class="mb-10 sm:mb-14 flex justify-between flex-row-reverse items-center w-full left-timeline reveal-left reveal-delay-2 group">
-                    <div class="order-1 w-[45%]"></div>
-                    <div class="z-20 flex items-center order-1 bg-gradient-to-br from-gold to-gold-dark shadow-[0_0_15px_rgba(212,175,55,0.7)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-white justify-center transform transition-transform group-hover:scale-125">
-                        <i class="fa-solid fa-cloud-rain text-white text-[10px] sm:text-sm"></i>
+                <!-- Ujian -->
+                <div class="relative pl-10 sm:pl-16 mb-12 reveal-left reveal-delay-1 group">
+                    <div class="absolute left-[7px] sm:left-[23px] top-8 w-5 h-5 bg-maroon-950 border-[3px] border-gold rounded-full z-10 group-hover:scale-125 transition-transform shadow-[0_0_10px_rgba(212,175,55,0.8)] flex items-center justify-center">
+                        <div class="w-1 h-1 bg-white rounded-full animate-ping"></div>
                     </div>
-                    <div class="order-1 glass-card-light rounded-2xl sm:rounded-3xl shadow-xl w-[45%] p-3 sm:p-5 text-right relative transition-all duration-500 border border-gold/20 hover:border-gold/60 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)]">
-                        <div class="absolute top-5 sm:top-6 -right-2 sm:-right-3 w-4 h-4 sm:w-6 sm:h-6 bg-white border-r border-t border-gold/30 transform rotate-45 rounded-sm"></div>
-                        
-                        <div class="overflow-hidden rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-gray-100 shadow-inner">
-                            <img src="ujian.jpeg" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Ujian & Bukti" class="w-full h-20 sm:h-40 object-cover transition-transform duration-1000 group-hover:scale-110" />
+                    
+                    <div class="bg-maroon-950 rounded-[1.5rem] p-4 sm:p-5 w-full text-center relative transition-all duration-500 border border-gold/30 hover:border-gold hover:-translate-y-2 shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+                        <div class="w-full h-40 sm:h-56 rounded-xl overflow-hidden border border-gold/40 shadow-md mb-4 relative group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-shadow">
+                            <img src="ujian.jpeg" onerror="this.src='https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Ujian" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
                         </div>
-                        <h4 class="mb-1.5 sm:mb-2 font-serif text-sm sm:text-lg font-bold text-maroon-950">Ujian & Bukti</h4>
-                        <p class="text-[9px] sm:text-xs text-gray-600 font-light leading-relaxed text-justify" style="text-align-last: right;">Perjalanan ini tidak hanya dipenuhi bahagia, tetapi juga air mata. Ada saat langkah terasa berat, namun cinta selalu menemukan jalan untuk menguatkan. Kami bertahan bukan karena semuanya mudah, melainkan karena doa yang tak putus.</p>
+                        <h4 class="font-serif text-base sm:text-lg font-bold text-gold mb-2 tracking-wide whitespace-nowrap overflow-hidden text-ellipsis px-2">Ujian & Bukti</h4>
+                        <p class="text-[11px] sm:text-xs text-gray-200 font-light leading-relaxed text-justify px-2">Perjalanan ini tidak hanya dipenuhi bahagia, tetapi juga air mata. Ada saat langkah terasa berat, namun cinta selalu menemukan jalan untuk menguatkan. Kami bertahan bukan karena semuanya mudah, melainkan karena doa yang tak putus.</p>
                     </div>
                 </div>
 
-                <div class="mb-10 sm:mb-14 flex justify-between items-center w-full right-timeline reveal-right reveal-delay-1 group">
-                    <div class="order-1 w-[45%]"></div>
-                    <div class="z-20 flex items-center order-1 bg-gradient-to-br from-maroon-800 to-maroon-950 shadow-[0_0_15px_rgba(91,20,34,0.5)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-gold justify-center transform transition-transform group-hover:scale-125">
-                        <i class="fa-solid fa-compass text-gold text-[10px] sm:text-sm"></i>
+                <!-- Takdir -->
+                <div class="relative pl-10 sm:pl-16 mb-12 reveal-left reveal-delay-2 group">
+                    <div class="absolute left-[7px] sm:left-[23px] top-8 w-5 h-5 bg-maroon-950 border-[3px] border-gold rounded-full z-10 group-hover:scale-125 transition-transform shadow-[0_0_10px_rgba(212,175,55,0.8)] flex items-center justify-center">
+                        <div class="w-1 h-1 bg-white rounded-full animate-ping"></div>
                     </div>
-                    <div class="order-1 glass-card-light rounded-2xl sm:rounded-3xl shadow-xl w-[45%] p-3 sm:p-5 text-left relative transition-all duration-500 border border-gold/20 hover:border-gold/60 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)]">
-                        <div class="absolute top-5 sm:top-6 -left-2 sm:-left-3 w-4 h-4 sm:w-6 sm:h-6 bg-white border-l border-b border-gold/30 transform rotate-45 rounded-sm"></div>
-                        
-                        <div class="overflow-hidden rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-gray-100 shadow-inner">
-                            <img src="takdir.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Takdir & Keyakinan" class="w-full h-20 sm:h-40 object-cover transition-transform duration-1000 group-hover:scale-110" />
+                    
+                    <div class="bg-maroon-950 rounded-[1.5rem] p-4 sm:p-5 w-full text-center relative transition-all duration-500 border border-gold/30 hover:border-gold hover:-translate-y-2 shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+                        <div class="w-full h-40 sm:h-56 rounded-xl overflow-hidden border border-gold/40 shadow-md mb-4 relative group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-shadow">
+                            <img src="takdir.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Takdir" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
                         </div>
-                        <h4 class="mb-1.5 sm:mb-2 font-serif text-sm sm:text-lg font-bold text-maroon-950">Takdir & Keyakinan</h4>
-                        <p class="text-[9px] sm:text-xs text-gray-600 font-light leading-relaxed text-justify">Kami mengerti, tidak setiap doa dijawab secepat harapan. Namun di setiap jeda, kami belajar percaya pada Sang Maha Cinta—yang selalu tahu ke mana hati harus pulang. Kami meyakini bahwa takdir terbaik selalu menemukan jalannya.</p>
+                        <h4 class="font-serif text-base sm:text-lg font-bold text-gold mb-2 tracking-wide whitespace-nowrap overflow-hidden text-ellipsis px-2">Takdir & Keyakinan</h4>
+                        <p class="text-[11px] sm:text-xs text-gray-200 font-light leading-relaxed text-justify px-2">Kami mengerti, tidak setiap doa dijawab secepat harapan. Namun di setiap jeda, kami belajar percaya pada Sang Maha Cinta—yang selalu tahu ke mana hati harus pulang. Kami meyakini bahwa takdir terbaik selalu menemukan jalannya.</p>
                     </div>
                 </div>
 
-                <div class="mb-8 flex justify-between flex-row-reverse items-center w-full left-timeline reveal-left reveal-delay-2 group">
-                    <div class="order-1 w-[45%]"></div>
-                    <div class="z-20 flex items-center order-1 bg-gradient-to-br from-maroon-800 to-maroon-950 shadow-[0_0_15px_rgba(91,20,34,0.5)] w-8 h-8 sm:w-10 sm:h-10 rounded-full border-[2px] sm:border-[3px] border-gold justify-center transform transition-transform group-hover:scale-125">
-                        <i class="fa-solid fa-dove text-gold text-[10px] sm:text-sm"></i>
+                <!-- Menuju -->
+                <div class="relative pl-10 sm:pl-16 mb-4 reveal-left group">
+                    <div class="absolute left-[7px] sm:left-[23px] top-8 w-5 h-5 bg-maroon-950 border-[3px] border-gold rounded-full z-10 group-hover:scale-125 transition-transform shadow-[0_0_10px_rgba(212,175,55,0.8)] flex items-center justify-center">
+                        <i class="fa-solid fa-heart text-[8px] text-gold animate-pulse"></i>
                     </div>
-                    <div class="order-1 glass-card-light rounded-2xl sm:rounded-3xl shadow-xl w-[45%] p-3 sm:p-5 text-right relative transition-all duration-500 border border-gold/20 hover:border-gold/60 hover:-translate-y-2 hover:shadow-[0_15px_30px_rgba(212,175,55,0.15)]">
-                        <div class="absolute top-5 sm:top-6 -right-2 sm:-right-3 w-4 h-4 sm:w-6 sm:h-6 bg-white border-r border-t border-gold/30 transform rotate-45 rounded-sm"></div>
-                        
-                        <div class="overflow-hidden rounded-xl sm:rounded-2xl mb-3 sm:mb-4 border border-gray-100 shadow-inner">
-                            <img src="menikah.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Menuju Hari Itu" class="w-full h-20 sm:h-40 object-cover transition-transform duration-1000 group-hover:scale-110" />
+                    
+                    <div class="bg-maroon-950 rounded-[1.5rem] p-4 sm:p-5 w-full text-center relative transition-all duration-500 border border-gold/30 hover:border-gold hover:-translate-y-2 shadow-[0_15px_40px_rgba(0,0,0,0.4)]">
+                        <div class="w-full h-40 sm:h-56 rounded-xl overflow-hidden border border-gold/40 shadow-md mb-4 relative group-hover:shadow-[0_0_15px_rgba(212,175,55,0.4)] transition-shadow">
+                            <img src="menikah.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Menuju" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-700" />
                         </div>
-                        <h4 class="mb-1.5 sm:mb-2 font-serif text-sm sm:text-lg font-bold text-maroon-950">Menuju Hari Itu</h4>
-                        <p class="text-[9px] sm:text-xs text-gray-600 font-light leading-relaxed text-justify" style="text-align-last: right;">Sebentar lagi, kisah ini akan melangkah ke babak baru—saat dua perjalanan menjadi satu tujuan, dan dua hati berjalan bersama dalam naungan cinta-Nya. Doakan kami, agar setiap langkah diberkahi kebahagiaan. 🤍✨</p>
+                        <h4 class="font-serif text-base sm:text-lg font-bold text-gold mb-2 tracking-wide whitespace-nowrap overflow-hidden text-ellipsis px-2">Menuju Hari Itu</h4>
+                        <p class="text-[11px] sm:text-xs text-gray-200 font-light leading-relaxed text-justify px-2">Sebentar lagi, kisah ini akan melangkah ke babak baru—saat dua perjalanan menjadi satu tujuan, dan dua hati berjalan bersama dalam naungan cinta-Nya. Doakan kami, agar setiap langkah diberkahi kebahagiaan. 🤍✨</p>
                     </div>
                 </div>
             </div>
             
-            <!-- Gelombang pemisah dihapus untuk transisi halus ke bagian Doa Pengantin -->
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
+                <svg class="relative block w-[calc(130%+1.3px)] h-[35px] sm:h-[50px] rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.5)"></path>
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff" style="transform: translateY(10px);"></path>
+                </svg>
+            </div>
         </section>
 
         <!-- 5.5 DOA PENGANTIN SECTION -->
-        <section class="py-20 sm:py-24 px-5 sm:px-6 relative overflow-hidden bg-white border-t border-gold/10">
+        <section class="py-20 sm:py-24 px-5 sm:px-6 relative overflow-hidden bg-parallax-light">
+            <div class="absolute inset-0 bg-white/95"></div>
             <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
             
-            <!-- Floral Accents -->
-            <i class="fa-brands fa-pagelines absolute -top-10 -left-10 text-9xl text-gold/20 wave-flower opacity-50"></i>
-            <i class="fa-brands fa-pagelines absolute bottom-20 -right-10 text-9xl text-gold/20 wave-flower opacity-50" style="transform: scaleX(-1);"></i>
+            <i class="fa-brands fa-pagelines absolute -top-10 -left-10 text-9xl text-maroon-900/10 wave-flower opacity-50"></i>
+            <i class="fa-brands fa-pagelines absolute bottom-20 -right-10 text-9xl text-maroon-900/10 wave-flower opacity-50" style="transform: scaleX(-1);"></i>
 
             <div class="relative z-10 text-center max-w-lg mx-auto">
-                <i class="fa-solid fa-hands-praying text-4xl sm:text-5xl text-gold mb-6 float reveal"></i>
-                <p class="text-gold tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs mb-6 uppercase font-sans font-semibold reveal drop-shadow-sm">Doa Pengantin</p>
+                <i class="fa-solid fa-hands-praying text-4xl sm:text-5xl text-maroon-900 mb-6 float reveal"></i>
+                <p class="text-maroon-900 tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs mb-6 uppercase font-sans font-semibold reveal drop-shadow-sm">Doa Pengantin</p>
                 
-                <div class="glass-card-light rounded-[2rem] p-8 sm:p-10 shadow-xl reveal-scale border border-gold/40 relative group hover:shadow-[0_15px_40px_rgba(212,175,55,0.2)] transition-shadow duration-500">
-                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-white px-4 border border-gold/30 rounded-full py-1">
+                <!-- Background Maroon untuk Card -->
+                <div class="bg-maroon-950 rounded-[2rem] p-8 sm:p-10 shadow-2xl reveal-scale border border-gold/40 relative group hover:shadow-[0_15px_40px_rgba(212,175,55,0.3)] transition-shadow duration-500">
+                    <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-maroon-950 px-4 border border-gold/30 rounded-full py-1">
                         <i class="fa-solid fa-spa text-gold text-2xl animate-pulse"></i>
                     </div>
                     
-                    <p class="font-arabic text-3xl sm:text-4xl text-maroon-900 leading-[1.8] sm:leading-[2] mb-6 mt-4 drop-shadow-sm" dir="rtl">
+                    <p class="font-arabic text-3xl sm:text-4xl text-gold leading-[2.5] sm:leading-[3] mb-6 mt-4 drop-shadow-md" dir="rtl">
                         بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِيْ خَيْرٍ
                     </p>
                     
-                    <div class="ornament-line w-1/2 mx-auto mb-6"></div>
+                    <div class="ornament-line w-1/2 mx-auto mb-6 opacity-70"></div>
                     
-                    <p class="text-gray-600 font-serif italic text-[13px] sm:text-base leading-relaxed mb-6">
+                    <p class="text-gray-300 font-serif italic text-[13px] sm:text-base leading-relaxed mb-6">
                         "Semoga Allah memberkahimu di waktu bahagia dan memberkahimu di waktu susah, serta semoga Allah mempersatukan kalian berdua dalam kebaikan."
                     </p>
                     
-                    <p class="font-bold text-maroon-950/70 font-sans uppercase tracking-[0.15em] text-[10px] sm:text-xs"><i class="fa-solid fa-book-open mr-2 opacity-70"></i>(HR. Abu Daud)</p>
+                    <p class="font-bold text-gold/70 font-sans uppercase tracking-[0.15em] text-[10px] sm:text-xs"><i class="fa-solid fa-book-open mr-2 opacity-70"></i>(HR. Abu Daud)</p>
                 </div>
             </div>
             
@@ -647,38 +645,71 @@
         </section>
 
         <!-- 6. GALLERY SECTION -->
-        <section class="py-20 sm:py-24 px-4 bg-parallax-dark relative border-y-[4px] sm:border-y-[6px] border-gold overflow-hidden">
-            <div class="absolute inset-0 bg-maroon-950/85"></div>
+        <section class="py-20 sm:py-24 px-0 bg-parallax-dark relative border-y-[4px] sm:border-y-[6px] border-gold overflow-hidden">
+            <div class="absolute inset-0 bg-maroon-950/90 mix-blend-multiply"></div>
             <div class="absolute inset-0 bg-gradient-to-b from-maroon-950/90 via-transparent to-maroon-950/90 z-0 pointer-events-none"></div>
             
-            <div class="text-center mb-12 sm:mb-16 reveal relative z-10 pt-4 sm:pt-6">
+            <div class="text-center mb-10 sm:mb-14 reveal relative z-10 pt-4 sm:pt-6 px-4">
                 <p class="text-gold-light tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs mb-2 sm:mb-3 uppercase font-sans drop-shadow-md">Momen Indah</p>
                 <h2 class="text-4xl sm:text-5xl font-serif font-bold text-gradient-gold drop-shadow-xl tracking-wide">Galeri Kami</h2>
             </div>
             
-            <div class="grid grid-cols-2 gap-3 sm:gap-4 px-2 sm:px-3 relative z-10">
-                <div class="reveal-scale overflow-hidden rounded-[1.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-40 sm:h-60 border-[2px] border-gold/30 hover:border-gold transition-colors duration-300 group relative cursor-pointer interactive-elem">
-                    <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
-                    <img src="1.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 1" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
-                </div>
-                <div class="reveal-scale reveal-delay-1 overflow-hidden rounded-[1.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-40 sm:h-60 border-[2px] border-gold/30 hover:border-gold transition-colors duration-300 group relative cursor-pointer interactive-elem">
-                    <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
-                    <img src="2.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 2" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
-                </div>
-                <div class="reveal-scale reveal-delay-2 overflow-hidden rounded-[1.5rem] shadow-[0_15px_40px_rgba(0,0,0,0.6)] col-span-2 h-56 sm:h-80 border-[3px] border-gold/50 hover:border-gold transition-colors duration-300 group relative cursor-pointer interactive-elem">
+            <!-- Grid (1-3-2) Padding dalam Section -->
+            <div class="relative w-full z-10 px-4 sm:px-6 mb-6">
+                <!-- 1 Besar Di Atas -->
+                <div class="w-full h-56 sm:h-[400px] rounded-2xl overflow-hidden border-[3px] border-gold/50 shadow-[0_15px_40px_rgba(0,0,0,0.6)] mb-3 sm:mb-4 reveal-scale relative group">
                     <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
-                    <img src="3.jpeg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Gallery 3" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                    <img src="1.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'" alt="Galeri" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
                 </div>
-                <div class="reveal-scale overflow-hidden rounded-[1.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-36 sm:h-52 border-[2px] border-gold/30 hover:border-gold transition-colors duration-300 group relative cursor-pointer interactive-elem">
-                    <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
-                    <img src="4.jpeg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 4" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                
+                <!-- 3 Sejajar Di Bawahnya -->
+                <div class="grid grid-cols-3 gap-2 sm:gap-4 mb-3 sm:mb-4 reveal-scale reveal-delay-1">
+                    <div class="aspect-square rounded-xl overflow-hidden border-2 border-gold/30 shadow-lg relative group">
+                        <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
+                        <img src="2.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                    </div>
+                    <div class="aspect-square rounded-xl overflow-hidden border-2 border-gold/30 shadow-lg relative group">
+                        <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
+                        <img src="3.jpeg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                    </div>
+                    <div class="aspect-square rounded-xl overflow-hidden border-2 border-gold/30 shadow-lg relative group">
+                        <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
+                        <img src="4.jpeg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                    </div>
                 </div>
-                <div class="reveal-scale reveal-delay-1 overflow-hidden rounded-[1.5rem] shadow-[0_10px_30px_rgba(0,0,0,0.5)] h-36 sm:h-52 border-[2px] border-gold/30 hover:border-gold transition-colors duration-300 group relative cursor-pointer interactive-elem">
-                    <div class="absolute inset-0 bg-maroon-950/30 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
-                    <img src="5.jpeg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Gallery 5" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                
+                <!-- 2 Sejajar Di Bawahnya Lagi -->
+                <div class="grid grid-cols-2 gap-2 sm:gap-4 reveal-scale reveal-delay-2">
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden border-2 border-gold/30 shadow-lg relative group">
+                        <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
+                        <img src="5.jpeg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                    </div>
+                    <div class="aspect-[4/3] rounded-xl overflow-hidden border-2 border-gold/30 shadow-lg relative group">
+                        <div class="absolute inset-0 bg-maroon-950/20 group-hover:bg-transparent transition duration-500 z-10 mix-blend-overlay"></div>
+                        <img src="1.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-1000" />
+                    </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 w-full overflow-hidden leading-[0] z-20">
+
+            <!-- Marquee Bawah (Full Width / Ujung ke Ujung) -->
+            <div class="w-full relative overflow-hidden reveal pb-8">
+                <div class="flex gap-2 sm:gap-3 w-max animate-marquee hover:[animation-play-state:paused] items-center py-2 px-2">
+                    <img src="1.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="2.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="3.jpeg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="4.jpeg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="5.jpeg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    
+                    <!-- Duplikasi -->
+                    <img src="1.jpeg" onerror="this.src='https://images.unsplash.com/photo-1606800052052-a08af7148866?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="2.jpeg" onerror="this.src='https://images.unsplash.com/photo-1519225421980-715cb0215aed?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="3.jpeg" onerror="this.src='https://images.unsplash.com/photo-1532712938310-34cb3982ef74?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="4.jpeg" onerror="this.src='https://images.unsplash.com/photo-1469334031218-e382a71b716b?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                    <img src="5.jpeg" onerror="this.src='https://images.unsplash.com/photo-1520854221256-17451cc331bf?ixlib=rb-4.0.3&auto=format&fit=crop&w=400&q=80'" alt="Galeri" class="h-20 sm:h-28 w-auto object-cover rounded-lg border border-gold/30 shadow-md hover:scale-110 transition duration-500" />
+                </div>
+            </div>
+            
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] z-20">
                 <svg class="relative block w-[calc(130%+1.3px)] h-[35px] sm:h-[50px] rotate-180" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(255,255,255,0.5)"></path>
                     <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#ffffff" style="transform: translateY(10px);"></path>
@@ -688,7 +719,7 @@
 
         <!-- 7. WEDDING GIFT SECTION -->
         <section class="py-20 sm:py-24 px-5 sm:px-6 bg-parallax-light text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-white/90"></div>
+            <div class="absolute inset-0 bg-white/95"></div>
             <div class="ambient-glow bg-gold/20 w-80 h-80 sm:w-[500px] sm:h-[500px] top-0 left-1/2 -translate-x-1/2"></div>
 
             <div class="w-16 h-16 sm:w-20 sm:h-20 bg-gradient-to-br from-maroon-50 to-maroon-100 rounded-full flex items-center justify-center mx-auto mb-5 sm:mb-6 shadow-[0_5px_15px_rgba(91,20,34,0.15)] border border-maroon-200 float reveal relative z-10">
@@ -702,7 +733,10 @@
                 <!-- SeaBank Lina -->
                 <div class="glass-card-light p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.2)] border-t-2 border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-1 group">
                     <div class="absolute -right-4 -top-4 sm:-right-6 sm:-top-6 text-gold/10 text-7xl sm:text-9xl transition-transform group-hover:rotate-12 group-hover:scale-110"><i class="fa-solid fa-building-columns"></i></div>
-                    <h3 class="font-bold text-xl sm:text-2xl mb-1 sm:mb-2 text-maroon-950 tracking-widest relative z-10">SEABANK</h3>
+                    
+                    <div class="flex justify-center mb-3 h-6 sm:h-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f6/Logo_SeaBank.png" alt="SeaBank" class="h-full object-contain relative z-10" onerror="this.outerHTML='<h3 class=\'font-bold text-xl sm:text-2xl text-[#ff6600] tracking-widest relative z-10\'>SEABANK</h3>'">
+                    </div>
                     <p class="text-[1.35rem] min-[380px]:text-2xl sm:text-3xl font-mono text-gray-800 tracking-[0.1em] sm:tracking-[0.15em] mb-2 font-medium relative z-10" id="rek-seabank-lina">9017 9960 7896</p>
                     <p class="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 font-light uppercase tracking-wider relative z-10">a.n Neng Lina Apriliani</p>
                     <button onclick="copyText('rek-seabank-lina', this, true)" class="interactive-elem relative z-10 bg-gradient-to-r from-maroon-900 to-maroon-950 text-gold hover:from-maroon-800 hover:to-maroon-900 px-5 sm:px-6 py-3 sm:py-4 rounded-xl text-[11px] sm:text-sm font-bold flex items-center justify-center gap-2 sm:gap-3 w-full transition shadow-lg shadow-maroon-900/20 uppercase tracking-widest overflow-hidden group/btn">
@@ -715,7 +749,10 @@
                 <!-- BCA Sarif -->
                 <div class="glass-card-light p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.2)] border-t-2 border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-1 group">
                     <div class="absolute -right-4 -top-4 sm:-right-6 sm:-top-6 text-gold/10 text-7xl sm:text-9xl transition-transform group-hover:rotate-12 group-hover:scale-110"><i class="fa-solid fa-building-columns"></i></div>
-                    <h3 class="font-bold text-xl sm:text-2xl mb-1 sm:mb-2 text-maroon-950 tracking-widest relative z-10">BCA</h3>
+                    
+                    <div class="flex justify-center mb-4 h-6 sm:h-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="h-full object-contain relative z-10" onerror="this.outerHTML='<h3 class=\'font-bold text-xl sm:text-2xl text-[#0066ae] tracking-widest relative z-10\'>BCA</h3>'">
+                    </div>
                     <p class="text-[1.35rem] min-[380px]:text-2xl sm:text-3xl font-mono text-gray-800 tracking-[0.1em] sm:tracking-[0.15em] mb-2 font-medium relative z-10" id="rek-bca-sarif">4461 5674 90</p>
                     <p class="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 font-light uppercase tracking-wider relative z-10">a.n Sarif Arifin</p>
                     <button onclick="copyText('rek-bca-sarif', this, true)" class="interactive-elem relative z-10 bg-gradient-to-r from-maroon-900 to-maroon-950 text-gold hover:from-maroon-800 hover:to-maroon-900 px-5 sm:px-6 py-3 sm:py-4 rounded-xl text-[11px] sm:text-sm font-bold flex items-center justify-center gap-2 sm:gap-3 w-full transition shadow-lg shadow-maroon-900/20 uppercase tracking-widest overflow-hidden group/btn">
@@ -728,7 +765,10 @@
                 <!-- DANA Sarif -->
                 <div class="glass-card-light p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden shadow-[0_10px_30px_rgba(0,0,0,0.05)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.2)] border-t-2 border-gold/30 hover:border-gold transition-all duration-300 hover:-translate-y-1 group">
                     <div class="absolute -right-4 -top-4 sm:-right-6 sm:-top-6 text-gold/10 text-7xl sm:text-9xl transition-transform group-hover:rotate-12 group-hover:scale-110"><i class="fa-solid fa-wallet"></i></div>
-                    <h3 class="font-bold text-xl sm:text-2xl mb-1 sm:mb-2 text-maroon-950 tracking-widest relative z-10">DANA</h3>
+                    
+                    <div class="flex justify-center mb-4 h-6 sm:h-8">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_dana_blue.svg" alt="DANA" class="h-full object-contain relative z-10" onerror="this.outerHTML='<h3 class=\'font-bold text-xl sm:text-2xl text-[#118ee0] tracking-widest relative z-10\'>DANA</h3>'">
+                    </div>
                     <p class="text-[1.35rem] min-[380px]:text-2xl sm:text-3xl font-mono text-gray-800 tracking-[0.1em] sm:tracking-[0.15em] mb-2 font-medium relative z-10" id="rek-dana-sarif">0896 5761 6155</p>
                     <p class="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8 font-light uppercase tracking-wider relative z-10">a.n Sarif Arifin</p>
                     <button onclick="copyText('rek-dana-sarif', this, true)" class="interactive-elem relative z-10 bg-gradient-to-r from-maroon-900 to-maroon-950 text-gold hover:from-maroon-800 hover:to-maroon-900 px-5 sm:px-6 py-3 sm:py-4 rounded-xl text-[11px] sm:text-sm font-bold flex items-center justify-center gap-2 sm:gap-3 w-full transition shadow-lg shadow-maroon-900/20 uppercase tracking-widest overflow-hidden group/btn">
@@ -738,19 +778,26 @@
                     </button>
                 </div>
 
-                <!-- Kirim Kado -->
-                <div class="glass-card-light p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden bg-gradient-to-br from-maroon-50 to-white border border-maroon-200/50 mt-10 sm:mt-12 shadow-[0_10px_30px_rgba(91,20,34,0.05)] hover:shadow-[0_15px_40px_rgba(212,175,55,0.2)] hover:border-gold/40 transition-all duration-300 reveal-scale group">
-                    <div class="w-12 h-12 sm:w-16 sm:h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-5 text-gold text-xl sm:text-2xl shadow-md border border-gold/20 float group-hover:scale-110 transition-transform"><i class="fa-solid fa-house-chimney-heart"></i></div>
-                    <h3 class="font-bold text-xl sm:text-2xl mb-2 sm:mb-3 text-maroon-950 font-serif relative z-10">Kirim Kado Fisik</h3>
-                    <p class="text-[10px] sm:text-xs font-semibold text-gray-700 mb-2 sm:mb-3 border-b border-maroon-200 pb-2 sm:pb-3 inline-block uppercase tracking-wider relative z-10">Penerima: Neng Lina Apriliani / Sarif Arifin</p>
-                    <p class="text-xs sm:text-sm text-gray-600 mb-6 sm:mb-8 font-light leading-relaxed mt-2 relative z-10" id="alamat-kado">
-                        Sukamenak, Wanaraja, Kabupaten Garut, Jawa Barat
-                    </p>
-                    <button onclick="copyText('alamat-kado', this, false)" class="interactive-elem relative z-10 bg-gradient-to-r from-gold-light via-gold to-gold-dark text-maroon-950 px-5 sm:px-6 py-3 sm:py-4 rounded-xl text-[11px] sm:text-sm font-bold flex items-center justify-center gap-2 sm:gap-3 w-full transition shadow-lg hover:shadow-[0_8px_25px_rgba(212,175,55,0.5)] hover:-translate-y-1 uppercase tracking-widest overflow-hidden group/btn">
-                        <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:animate-shimmer"></div>
-                        <i class="fa-regular fa-copy text-base sm:text-lg relative z-10"></i>
-                        <span class="relative z-10">Salin Alamat Lengkap</span>
-                    </button>
+                <!-- Kirim Kado Fisik -->
+                <div class="mt-12 sm:mt-16 reveal-scale text-center relative z-10">
+                    <i class="fa-solid fa-gift text-4xl sm:text-5xl text-maroon-900 mb-4 animate-bounce drop-shadow-md"></i>
+                    
+                    <!-- Background Maroon -->
+                    <div class="bg-maroon-950 p-6 sm:p-8 rounded-[1.5rem] sm:rounded-3xl relative overflow-hidden shadow-[0_15px_40px_rgba(0,0,0,0.5)] border border-gold/40 border-t-[4px] border-t-gold transition-all duration-500 group text-center">
+                        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none"></div>
+                        
+                        <h3 class="font-bold text-2xl sm:text-3xl mb-2 sm:mb-3 text-gold font-serif relative z-10 tracking-wide">Kirim Kado Fisik</h3>
+                        <p class="text-[10px] sm:text-xs font-semibold text-gray-300 mb-2 sm:mb-3 border-b border-gold/30 pb-2 sm:pb-3 inline-block uppercase tracking-wider relative z-10">Penerima: Neng Lina Apriliani / Sarif Arifin</p>
+                        <p class="text-xs sm:text-sm text-gray-200 mb-6 sm:mb-8 font-light leading-relaxed mt-2 relative z-10" id="alamat-kado">
+                            Sukamenak, Wanaraja, Kabupaten Garut, Jawa Barat
+                        </p>
+                        
+                        <button onclick="copyText('alamat-kado', this, false)" class="interactive-elem relative z-10 bg-gradient-to-r from-gold-light via-gold to-gold-dark text-maroon-950 px-5 sm:px-6 py-3.5 sm:py-4 rounded-xl text-[11px] sm:text-sm font-bold flex items-center justify-center gap-2 sm:gap-3 w-full transition shadow-[0_5px_15px_rgba(212,175,55,0.3)] hover:shadow-[0_10px_25px_rgba(212,175,55,0.6)] hover:-translate-y-1 uppercase tracking-widest overflow-hidden group/btn">
+                            <div class="absolute inset-0 bg-white/20 transform -skew-x-12 -translate-x-full group-hover/btn:animate-shimmer"></div>
+                            <i class="fa-regular fa-copy text-base sm:text-lg relative z-10"></i>
+                            <span class="relative z-10">Salin Alamat Lengkap</span>
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -758,62 +805,81 @@
 
         <!-- 8. RSVP & GUESTBOOK -->
         <section class="py-20 sm:py-24 px-5 sm:px-6 bg-parallax-light relative overflow-hidden">
-            <div class="absolute inset-0 bg-white/90"></div>
-            <div class="text-center mb-10 sm:mb-14 reveal relative z-10">
-                <p class="text-gold tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs mb-2 sm:mb-3 uppercase font-sans font-semibold">Kehadiran & Doa</p>
-                <h2 class="text-4xl sm:text-5xl font-serif text-maroon-950 font-bold">RSVP</h2>
+            <div class="absolute inset-0 bg-white/95 z-0"></div>
+            
+            <!-- Pembatas Atas RSVP (Gelombang Halus) -->
+            <div class="absolute top-0 left-0 w-full overflow-hidden leading-[0] z-20">
+                <svg class="relative block w-[calc(130%+1.3px)] h-[35px] sm:h-[50px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="rgba(212,175,55,0.1)"></path>
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="transparent" stroke="#d4af37" stroke-width="2" style="transform: translateY(-5px);"></path>
+                </svg>
             </div>
 
-            <form id="rsvp-form" class="glass-card-light p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] mb-10 sm:mb-14 shadow-[0_20px_50px_rgba(0,0,0,0.08)] reveal-scale border-t-[4px] sm:border-t-[6px] border-t-maroon-900 bg-white relative z-10 hover:shadow-[0_20px_50px_rgba(212,175,55,0.15)] transition-shadow duration-500">
-                <div class="space-y-5 sm:space-y-7">
+            <div class="text-center mb-10 sm:mb-14 reveal relative z-10 pt-6">
+                <p class="text-maroon-900 tracking-[0.3em] sm:tracking-[0.4em] text-[10px] sm:text-xs mb-2 sm:mb-3 uppercase font-sans font-semibold drop-shadow-sm">Kehadiran & Doa</p>
+                <h2 class="text-4xl sm:text-5xl font-serif text-maroon-950 font-bold drop-shadow-sm">RSVP</h2>
+            </div>
+
+            <!-- Card Formulir RSVP (Maroon) -->
+            <form id="rsvp-form" class="bg-maroon-950 p-6 sm:p-10 rounded-[1.5rem] sm:rounded-[2rem] mb-10 sm:mb-14 shadow-[0_20px_50px_rgba(0,0,0,0.4)] reveal-scale border border-gold/40 border-t-[4px] border-t-gold relative z-10 hover:shadow-[0_20px_50px_rgba(212,175,55,0.2)] transition-shadow duration-500">
+                <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none rounded-[1.5rem]"></div>
+                
+                <div class="space-y-5 sm:space-y-7 relative z-10">
                     <div>
-                        <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Nama Anda</label>
-                        <input type="text" id="guest-input-name" placeholder="Ketik nama lengkap..." class="interactive-elem w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm transition-all" required>
+                        <label class="block text-[10px] sm:text-xs font-bold text-gold uppercase tracking-widest mb-2 sm:mb-3">Nama Anda</label>
+                        <input type="text" id="guest-input-name" placeholder="Ketik nama lengkap..." class="interactive-elem w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border border-gold/30 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/50 bg-black/30 text-white placeholder-gray-400 text-xs sm:text-sm transition-all" required>
                     </div>
                     <div>
-                        <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Konfirmasi Kehadiran</label>
+                        <label class="block text-[10px] sm:text-xs font-bold text-gold uppercase tracking-widest mb-2 sm:mb-3">Konfirmasi Kehadiran</label>
                         <div class="relative">
-                            <select id="guest-attendance" class="interactive-elem w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm text-gray-700 transition-all appearance-none font-medium">
-                                <option value="Hadir">Ya, Saya akan Hadir</option>
-                                <option value="Tidak Hadir">Maaf, Saya Tidak Bisa Hadir</option>
+                            <select id="guest-attendance" class="interactive-elem w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border border-gold/30 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/50 bg-black/30 text-white placeholder-gray-400 text-xs sm:text-sm transition-all appearance-none font-medium">
+                                <option value="Hadir" class="text-maroon-950">Ya, Saya akan Hadir</option>
+                                <option value="Tidak Hadir" class="text-maroon-950">Maaf, Saya Tidak Bisa Hadir</option>
                             </select>
                             <div class="absolute inset-y-0 right-0 flex items-center px-4 sm:px-5 pointer-events-none text-gold"><i class="fa-solid fa-chevron-down text-xs"></i></div>
                         </div>
                     </div>
                     <div>
-                        <label class="block text-[10px] sm:text-xs font-bold text-maroon-950 uppercase tracking-widest mb-2 sm:mb-3">Ucapan & Doa</label>
+                        <label class="block text-[10px] sm:text-xs font-bold text-gold uppercase tracking-widest mb-2 sm:mb-3">Ucapan & Doa</label>
                         <div class="relative">
-                            <textarea id="guest-message" placeholder="Berikan doa terbaik untuk kedua mempelai..." rows="4" class="interactive-elem w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border-2 border-gray-100 focus:outline-none focus:border-gold focus:ring-4 focus:ring-gold/20 bg-gray-50/50 text-xs sm:text-sm resize-none transition-all leading-relaxed" required></textarea>
+                            <textarea id="guest-message" placeholder="Berikan doa terbaik untuk kedua mempelai..." rows="4" class="interactive-elem w-full px-4 sm:px-5 py-3.5 sm:py-4 rounded-xl border border-gold/30 focus:outline-none focus:border-gold focus:ring-2 focus:ring-gold/50 bg-black/30 text-white placeholder-gray-400 text-xs sm:text-sm resize-none transition-all leading-relaxed" required></textarea>
                             
                             <!-- Fitur Asisten Ucapan Otomatis -->
-                            <div class="mt-3 sm:mt-4 bg-gradient-to-br from-maroon-50 to-white border border-maroon-100 rounded-xl p-4 sm:p-5 hidden shadow-inner transition-all duration-300" id="ai-helper-box">
-                                <p class="text-[11px] sm:text-xs text-maroon-950 font-bold mb-2 tracking-wide"><i class="fa-solid fa-robot text-gold mr-1.5 sm:mr-2 text-base sm:text-lg"></i> Asisten Penulis Ucapan</p>
-                                <p class="text-[10px] sm:text-[11px] text-gray-500 mb-3 sm:mb-4 leading-relaxed">Pilih kedekatan Anda, asisten kami akan otomatis merangkai kata yang tulus & indah.</p>
+                            <div class="mt-3 sm:mt-4 bg-black/40 border border-gold/30 rounded-xl p-4 sm:p-5 hidden shadow-inner transition-all duration-300" id="ai-helper-box">
+                                <p class="text-[11px] sm:text-xs text-gold font-bold mb-2 tracking-wide"><i class="fa-solid fa-robot text-gold mr-1.5 sm:mr-2 text-base sm:text-lg"></i> Asisten Penulis Ucapan</p>
+                                <p class="text-[10px] sm:text-[11px] text-gray-300 mb-3 sm:mb-4 leading-relaxed">Pilih kedekatan Anda, asisten kami akan otomatis merangkai kata yang tulus & indah.</p>
                                 <div class="flex gap-2 sm:gap-2.5 flex-wrap">
-                                    <button type="button" onclick="generateWish('sahabat')" class="interactive-elem text-[9px] sm:text-[10px] font-bold bg-white border border-gold/40 text-maroon-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full hover:bg-gold hover:text-white hover:border-gold transition shadow-sm uppercase tracking-wider">Sahabat</button>
-                                    <button type="button" onclick="generateWish('keluarga')" class="interactive-elem text-[9px] sm:text-[10px] font-bold bg-white border border-gold/40 text-maroon-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full hover:bg-gold hover:text-white hover:border-gold transition shadow-sm uppercase tracking-wider">Keluarga</button>
-                                    <button type="button" onclick="generateWish('rekan')" class="interactive-elem text-[9px] sm:text-[10px] font-bold bg-white border border-gold/40 text-maroon-900 px-3 sm:px-4 py-2 sm:py-2.5 rounded-full hover:bg-gold hover:text-white hover:border-gold transition shadow-sm uppercase tracking-wider">Rekan Kerja</button>
+                                    <button type="button" onclick="generateWish('sahabat')" class="interactive-elem text-[9px] sm:text-[10px] font-bold bg-white/10 border border-gold/40 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full hover:bg-gold hover:text-maroon-950 hover:border-gold transition shadow-sm uppercase tracking-wider">Sahabat</button>
+                                    <button type="button" onclick="generateWish('keluarga')" class="interactive-elem text-[9px] sm:text-[10px] font-bold bg-white/10 border border-gold/40 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full hover:bg-gold hover:text-maroon-950 hover:border-gold transition shadow-sm uppercase tracking-wider">Keluarga</button>
+                                    <button type="button" onclick="generateWish('rekan')" class="interactive-elem text-[9px] sm:text-[10px] font-bold bg-white/10 border border-gold/40 text-white px-3 sm:px-4 py-2 sm:py-2.5 rounded-full hover:bg-gold hover:text-maroon-950 hover:border-gold transition shadow-sm uppercase tracking-wider">Rekan Kerja</button>
                                 </div>
                             </div>
                             
-                            <button type="button" onclick="toggleAIHelper()" class="interactive-elem mt-3 sm:mt-4 text-[11px] sm:text-xs text-maroon-800 font-bold hover:text-gold flex items-center gap-1.5 sm:gap-2 transition uppercase tracking-wider">
+                            <button type="button" onclick="toggleAIHelper()" class="interactive-elem mt-3 sm:mt-4 text-[11px] sm:text-xs text-gold font-bold hover:text-gold-light flex items-center gap-1.5 sm:gap-2 transition uppercase tracking-wider">
                                 <i class="fa-solid fa-wand-magic-sparkles text-gold text-base sm:text-lg animate-pulse"></i> Bingung ngucapin apa? Klik disini
                             </button>
                         </div>
                     </div>
                     
-                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-6">
-                        <button type="submit" onclick="window.waTarget = '6289657616155';" class="interactive-elem w-full relative bg-gradient-to-r from-maroon-900 to-maroon-950 text-gold font-bold py-4 sm:py-4 px-6 rounded-xl transition-all duration-300 shadow-[0_10px_20px_rgba(91,20,34,0.3)] uppercase tracking-widest text-[10px] sm:text-xs hover:-translate-y-1 hover:shadow-[0_15px_25px_rgba(91,20,34,0.5)] overflow-hidden group">
-                            <div class="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:animate-shimmer"></div>
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 mt-8 pt-4 border-t border-gold/20">
+                        <button type="submit" onclick="window.waTarget = '6289657616155';" class="interactive-elem w-full relative bg-gradient-to-r from-gold-light via-gold to-gold-dark text-maroon-950 font-bold py-4 sm:py-4 px-6 rounded-xl transition-all duration-300 shadow-[0_5px_15px_rgba(212,175,55,0.3)] uppercase tracking-widest text-[10px] sm:text-xs hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(212,175,55,0.5)] overflow-hidden group">
+                            <div class="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:animate-shimmer"></div>
                             <span class="relative z-10"><i class="fa-brands fa-whatsapp mr-1 text-base"></i> Pihak Pria</span>
                         </button>
-                        <button type="submit" onclick="window.waTarget = '6281214010708';" class="interactive-elem w-full relative bg-gradient-to-r from-maroon-900 to-maroon-950 text-gold font-bold py-4 sm:py-4 px-6 rounded-xl transition-all duration-300 shadow-[0_10px_20px_rgba(91,20,34,0.3)] uppercase tracking-widest text-[10px] sm:text-xs hover:-translate-y-1 hover:shadow-[0_15px_25px_rgba(91,20,34,0.5)] overflow-hidden group">
-                            <div class="absolute inset-0 bg-white/10 transform -skew-x-12 -translate-x-full group-hover:animate-shimmer"></div>
+                        <button type="submit" onclick="window.waTarget = '6281214010708';" class="interactive-elem w-full relative bg-gradient-to-r from-gold-light via-gold to-gold-dark text-maroon-950 font-bold py-4 sm:py-4 px-6 rounded-xl transition-all duration-300 shadow-[0_5px_15px_rgba(212,175,55,0.3)] uppercase tracking-widest text-[10px] sm:text-xs hover:-translate-y-1 hover:shadow-[0_10px_25px_rgba(212,175,55,0.5)] overflow-hidden group">
+                            <div class="absolute inset-0 bg-white/30 transform -skew-x-12 -translate-x-full group-hover:animate-shimmer"></div>
                             <span class="relative z-10"><i class="fa-brands fa-whatsapp mr-1 text-base"></i> Pihak Wanita</span>
                         </button>
                     </div>
                 </div>
             </form>
+
+            <!-- Pembatas Bawah RSVP -->
+            <div class="absolute bottom-0 left-0 w-full overflow-hidden leading-[0] rotate-180 z-20">
+                <svg class="relative block w-[calc(130%+1.3px)] h-[35px] sm:h-[50px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                    <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="#340811"></path>
+                </svg>
+            </div>
         </section>
 
         <!-- 9. FOOTER -->
@@ -830,7 +896,7 @@
             </div>
             
             <div class="relative z-10 reveal-scale">
-                <h2 class="text-5xl sm:text-6xl font-serif font-bold text-gradient-gold mb-2 mt-10 sm:mt-12 drop-shadow-xl tracking-wide">Lina & Sarif</h2>
+                <h2 class="text-4xl min-[380px]:text-5xl sm:text-5xl font-serif font-bold text-gradient-gold mb-2 mt-10 sm:mt-12 drop-shadow-xl tracking-wide px-4 sm:px-6 text-center whitespace-nowrap">Lina & Sarif</h2>
                 <p class="font-handwriting text-2xl sm:text-3xl text-gold-light opacity-80 mb-8 sm:mb-10">Thank you</p>
                 <p class="text-xs sm:text-sm text-gray-300 mb-10 sm:mb-14 font-light leading-relaxed max-w-xs sm:max-w-sm mx-auto px-2 sm:px-4 drop-shadow-md">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu.</p>
                 
@@ -862,7 +928,6 @@
                 cursorDot.style.left = `${posX}px`;
                 cursorDot.style.top = `${posY}px`;
                 
-                // Slight delay for outline for smooth effect
                 setTimeout(() => {
                     cursorOutline.style.left = `${posX}px`;
                     cursorOutline.style.top = `${posY}px`;
@@ -920,6 +985,52 @@
             window.updateCountdown();
             initScrollObserver();
         });
+
+        // Auto Scroll Setup
+        let autoScrollInterval = null;
+        let isAutoScrolling = false;
+        let scrollSpeed = 0.6;
+        let interactionTimeout = null;
+
+        function autoScrollLoop() {
+            if (!isAutoScrolling) return;
+            window.scrollBy(0, scrollSpeed);
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 10) {
+                stopAutoScroll();
+                return;
+            }
+            autoScrollInterval = requestAnimationFrame(autoScrollLoop);
+        }
+
+        function startAutoScroll() {
+            if (isAutoScrolling) return;
+            isAutoScrolling = true;
+            autoScrollLoop();
+        }
+
+        function stopAutoScroll() {
+            isAutoScrolling = false;
+            if (autoScrollInterval) cancelAnimationFrame(autoScrollInterval);
+        }
+
+        function handleUserInteraction() {
+            if (isAutoScrolling) {
+                stopAutoScroll();
+            }
+            clearTimeout(interactionTimeout);
+            interactionTimeout = setTimeout(() => {
+                const cover = document.getElementById('cover-screen');
+                const coverHidden = cover && cover.style.transform === 'translateY(-100%)';
+                if (coverHidden && (window.innerHeight + window.scrollY) < document.body.offsetHeight - 10) {
+                    startAutoScroll();
+                }
+            }, 3000);
+        }
+
+        window.addEventListener('touchstart', handleUserInteraction, {passive: true});
+        window.addEventListener('touchmove', handleUserInteraction, {passive: true});
+        window.addEventListener('wheel', handleUserInteraction, {passive: true});
+        window.addEventListener('mousedown', handleUserInteraction, {passive: true});
 
         // Simple Confetti Function
         function fireConfetti() {
@@ -1027,17 +1138,19 @@
                 btns.forEach((btn, index) => {
                     if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(waTarget)) {
                         btn.innerHTML = '<i class="fa-solid fa-check mr-2 text-base sm:text-lg"></i> <span class="relative z-10">Berhasil</span>';
-                        btn.classList.replace('from-maroon-900', 'from-green-600');
-                        btn.classList.replace('to-maroon-950', 'to-green-700');
+                        btn.classList.replace('from-gold-light', 'from-green-500');
+                        btn.classList.replace('to-gold-dark', 'to-green-700');
+                        btn.classList.replace('text-maroon-950', 'text-white');
                     }
                 });
                 
                 setTimeout(() => {
                     btns.forEach((btn, index) => {
                         btn.innerHTML = originalTexts[index];
-                        if (btn.classList.contains('from-green-600')) {
-                            btn.classList.remove('from-green-600', 'to-green-700');
-                            btn.classList.add('from-maroon-900', 'to-maroon-950');
+                        if (btn.classList.contains('from-green-500')) {
+                            btn.classList.replace('from-green-500', 'from-gold-light');
+                            btn.classList.replace('to-green-700', 'to-gold-dark');
+                            btn.classList.replace('text-white', 'text-maroon-950');
                         }
                         btn.disabled = false;
                     });
@@ -1079,8 +1192,8 @@
                 const randomIndex = Math.floor(Math.random() * randomQuotes.length);
                 textArea.value = randomQuotes[randomIndex];
                 
-                textArea.classList.add('ring-4', 'ring-gold/30');
-                setTimeout(() => textArea.classList.remove('ring-4', 'ring-gold/30'), 1000);
+                textArea.classList.add('ring-4', 'ring-gold/50');
+                setTimeout(() => textArea.classList.remove('ring-4', 'ring-gold/50'), 1000);
             }, 600);
         }
 
@@ -1102,6 +1215,7 @@
                             el.classList.add('active');
                         }
                     });
+                    startAutoScroll();
                 }, 800);
             }, 500);
         }
@@ -1172,15 +1286,14 @@
             try {
                 document.execCommand('copy');
                 const originalHtml = btn.innerHTML;
-                btn.innerHTML = `<i class="fa-solid fa-check text-green-400 mr-2 relative z-10"></i> <span class="relative z-10">Tersalin!</span>`;
-                btn.classList.add('bg-maroon-800');
+                btn.innerHTML = `<i class="fa-solid fa-check text-green-800 mr-2 relative z-10"></i> <span class="relative z-10">Tersalin!</span>`;
+                btn.classList.replace('text-maroon-950', 'text-green-900');
                 
-                // Fire confetti on success!
                 fireConfetti();
                 
                 setTimeout(() => {
                     btn.innerHTML = originalHtml;
-                    btn.classList.remove('bg-maroon-800');
+                    btn.classList.replace('text-green-900', 'text-maroon-950');
                 }, 2000);
             } catch (err) {
                 window.showToast('Gagal menyalin. Silakan salin secara manual.', 'error');
